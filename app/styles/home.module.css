@@ -1,0 +1,46 @@
+.sunImage {
+  position: absolute;
+  top: 0px;
+  right: 0px;
+  z-index: -20;
+}
+.mountainImage {
+  width: 250px;
+  height: auto;
+  position: absolute;
+  bottom: 0px;
+  left: 0px;
+  z-index: -20;
+}
+
+.rainbowText {
+  background-image: linear-gradient(
+    to left,
+    #ff75c3,
+    #ffa647,
+    #ffe83f,
+    #9fff5b,
+    #70e2ff,
+    #cd93ff
+  );
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+@media (max-width: 768px) {
+  .sunImage {
+    height: auto;
+    width: 180px;
+  }
+  .mountainImage {
+    height: auto;
+    width: 180px;
+  }
+}
+
+@keyframes floating {
+  from {
+  }
+  to {
+  }
+}
