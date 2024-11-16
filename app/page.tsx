@@ -1,4 +1,4 @@
-import { Container, Button, Box, Typography } from "@mui/material";
+import { Container, Box, Typography } from "@mui/material";
 import Image from "next/image";
 import sunSvg from "@/public/Home/sunSvg.svg";
 import mountainSvg from "@/public/Home/mountainSvg.svg";
@@ -35,7 +35,12 @@ export default function Home() {
             mb: "50px",
           }}
         >
-          <Typography variant="h1" sx={{ display: "inline-block" }}>
+          <Typography
+            variant="h1"
+            sx={{
+              display: "inline-block",
+            }}
+          >
             Kolorowanki inspirowane twoją
           </Typography>
           <Typography
@@ -49,11 +54,14 @@ export default function Home() {
           >
             wyobraźnią
           </Typography>
-          <Typography sx={{ maxWidth: "500px", mt: "20px", fontWeight: "200" }}>
+          <Typography
+            sx={{ maxWidth: "600px", mt: "20px", fontWeight: "200" }}
+            variant="h4"
+          >
             Wpisz postać, scenę czy krajobraz, a sztuczna inteligencja
             wygeneruje dla ciebie obrazy
           </Typography>
-          <NavButton text="Przejdź dalej" direction="/dashboard" />
+          <NavButton />
           <Image
             src={mountainSvg}
             alt="Rysunek gór"
