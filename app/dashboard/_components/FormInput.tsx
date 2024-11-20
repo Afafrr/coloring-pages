@@ -10,8 +10,11 @@ import {
 } from "@mui/material";
 import React, { useState } from "react";
 import PopularBtns from "./PopularBtns";
+import { generateImage } from "../actions";
 import CardImage from "./CardImage";
+import { AiResponse } from "@/types";
 import { useTheme } from "@mui/material/styles";
+import Modal from "./Modal";
 import { ImageObj } from "@/types";
 
 const dummyData = [
@@ -29,7 +32,11 @@ const dummyData = [
 
 export function FormInput() {
   const [input, setInput] = useState("");
+  const [isLoading, setIsLoading] = useState(false);
   const [images, setImages] = useState<ImageObj[]>(dummyData);
+  const [error, setError] = useState("");
+  const [showModal, setShowModal] = useState(false);
+  const handleClose = () => setShowModal(false);
   const theme = useTheme();
   const smallScreen = useMediaQuery(theme.breakpoints.down("md"));
 
@@ -38,8 +45,27 @@ export function FormInput() {
   }
 
   async function handleClick() {
+    setIsLoading(true);
+    const response = await generateImage(input);
+    const { data, error: resError } = response as {
+      data: AiResponse;
+      error: string;
+    };
+    const { id, url, inputText, status, error } = data;
+    const imageObj = { id, url, inputText };
+    
+    if (!resError && status === "succeeded") {
+      setImages([...images, imageObj]);
+    } else {
+      const message = status !== "succeeded" ? error : resError;
+      setIsLoading(false);
+      setError(message as string);
+    }
   }
-
+  //if text length shorter than 3
+  function emptyInputHandler() {
+    setShowModal(true);
+  }
   function handleDeleteClick(id: string) {
     setImages(images.filter((images) => images.id !== id));
   }
@@ -81,6 +107,7 @@ export function FormInput() {
               multiline
               inputMode="text"
               placeholder="Elza tańcząca w krainie lodu..."
+              disabled={isLoading}
               rows={smallScreen ? 3 : 2}
             />
             <Button
@@ -91,8 +118,9 @@ export function FormInput() {
                 color: "#ffffff",
                 textShadow: "1px 0px 5px #8e928e;",
               }}
-              onClick={handleClick}
+              onClick={input.length > 3 ? handleClick : emptyInputHandler}
               variant="contained"
+              disabled={isLoading}
             >
               Generuj
             </Button>
@@ -122,6 +150,12 @@ export function FormInput() {
           ))}
         </Grid2>
       </Card>
+      <Modal
+        showModal={showModal}
+        handleClose={handleClose}
+        handleClick={handleClick}
+        input={input}
+      />
     </>
   );
 }
