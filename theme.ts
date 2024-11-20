@@ -24,6 +24,9 @@ export const basicTheme = createTheme({
       primary: "#333333",
       secondary: "#757575",
     },
+    warning: {
+      main: "#C70000",
+    },
   },
   typography: {
     fontFamily: inter.style.fontFamily,

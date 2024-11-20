@@ -3,7 +3,7 @@ import { FormInput } from "./_components/FormInput";
 
 export default async function Page() {
   return (
-    <Box sx={{ mx: { xs: "10px", md: "20px" } }}>
+    <Box sx={{ mx: { xs: "3px", md: "20px" } }}>
       <Box sx={{ m: { xs: "10px", md: "20px" } }}>
         <Typography variant="h3" sx={{ fontWeight: "bold" }}>
           Stwórz kolorowankę
