@@ -53,9 +53,9 @@ export function FormInput() {
       setImages([...images, imageObj]);
     } else {
       const message = status !== "succeeded" ? generationError : resError;
-      setIsLoading(false);
       setError(message as string);
     }
+    setIsLoading(false);
   }
   //if text length shorter than 3
   function emptyInputHandler() {
