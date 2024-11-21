@@ -16,8 +16,9 @@ import { AiResponse } from "@/types";
 import { useTheme } from "@mui/material/styles";
 import Modal from "./Modal";
 import { ImageObj } from "@/types";
+import LimitInfo from "./LimitInfo";
 
-export function FormInput() {
+export function FormInput({ limit }: { limit: number }) {
   const [input, setInput] = useState("");
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState("");
@@ -47,8 +48,9 @@ export function FormInput() {
       data: AiResponse | null;
       error: string;
     };
+
     if (resError || !data)
-      setError((resError as string) && "Wystąpił nieznany problem");
+      setError((resError as string) || "Wystąpił nieznany problem");
     else {
       const { id, url, inputText } = data;
       const imageObj = { id, url, inputText };
@@ -120,6 +122,7 @@ export function FormInput() {
             >
               Generuj
             </Button>
+            <LimitInfo curNum={images.length} limit={limit} />
           </Box>
         </Box>
       </FormControl>

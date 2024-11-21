@@ -33,7 +33,7 @@ export default function CardImage({
           priority
           fill
           src={imageObj.url}
-          alt=""
+          alt={`Image of ${imageObj.inputText}`}
           sizes="(max-width: 500px) 50vw, 50vw"
           style={{
             objectFit: "cover",

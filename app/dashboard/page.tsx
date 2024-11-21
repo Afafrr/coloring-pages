@@ -1,6 +1,6 @@
 import { Typography, Box } from "@mui/material";
 import { FormInput } from "./_components/FormInput";
-
+import config from "@/config";
 export default async function Page() {
   return (
     <Box sx={{ mx: { xs: "3px", md: "20px" } }}>
@@ -12,7 +12,7 @@ export default async function Page() {
           Możesz wpisać nazwę postaci, czynność jaką ma robić, scenerię w jakiej
           ma się znajdować i wiele innych!
         </Typography>
-        <FormInput />
+        <FormInput limit={config.IMAGE_LIMIT} />
       </Box>
     </Box>
   );

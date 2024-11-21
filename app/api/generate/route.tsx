@@ -1,14 +1,21 @@
 import { NextRequest, NextResponse } from "next/server";
 import Replicate from "replicate";
+import config from "@/config";
 
 const replicate = new Replicate({
   auth: process.env.REPLICATE_API_TOKEN,
 });
 
+// calls replicate with desired prompt and checks if user fits in limit
 export async function POST(req: NextRequest) {
+  const { prompt, imagesNum } = await req.json();
+  //if limit reached return error
+  if (imagesNum >= config.IMAGE_LIMIT)
+    return NextResponse.json({}, { status: 500, statusText: "Limit" });
+
   const reqPromptText: string =
-    (await req.json()) || "popular random animated fairy tale character";
-  const promptText = `Create a coloring page for kids, with ${reqPromptText}, it will be most likely a character from a animated fairy tale, the outlines should be black, the rest is white, the image have to be black and white, fill the whole page`;
+    prompt || "popular random animated fairy tale character";
+  const promptText = `Create a page for kids, with ${reqPromptText}, the image shoud have only the black outlines, don't color it, black and white image with sharp and thick edges, fill the whole page`;
 
   const input = {
     prompt: promptText,
@@ -35,7 +42,7 @@ export async function POST(req: NextRequest) {
 
   const responseObj = {
     id,
-    inputText: reqPromptText,
+    inputText: prompt,
     url: output,
     error,
     status,
