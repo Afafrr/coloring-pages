@@ -41,29 +41,27 @@ export function FormInput() {
 
   async function handleClick() {
     setIsLoading(true);
-    const response = await generateImage(input);
+    setShowModal(false);
+    const response = await generateImage(input, images.length);
     const { data, error: resError } = response as {
-      data: AiResponse;
+      data: AiResponse | null;
       error: string;
     };
-    const { id, url, inputText, status, error: generationError } = data;
-    const imageObj = { id, url, inputText };
-
-    if (!resError && status === "succeeded") {
+    if (resError || !data)
+      setError((resError as string) && "Wystąpił nieznany problem");
+    else {
+      const { id, url, inputText } = data;
+      const imageObj = { id, url, inputText };
       setImages([...images, imageObj]);
-    } else {
-      const message = status !== "succeeded" ? generationError : resError;
-      setError(message as string);
     }
     setIsLoading(false);
   }
+
   //if text length shorter than 3
   function emptyInputHandler() {
     setShowModal(true);
   }
   function handleDeleteClick(id: string) {
-    const filtered = images.filter((images) => images.id !== id);
-
     setImages(images.filter((images) => images.id !== id));
   }
 
@@ -76,6 +74,7 @@ export function FormInput() {
           mt: "10px",
         }}
       >
+        {error}
         <Box
           sx={{
             display: "flex",
@@ -136,7 +135,7 @@ export function FormInput() {
       >
         <Grid2
           container
-          columns={{ xs: 2, sm: 4, md: 5, lg: 7, xl: 9 }}
+          columns={{ xs: 2, sm: 3, md: 4, lg: 5, xl: 7 }}
           spacing={2}
         >
           {images.map((image) => (
