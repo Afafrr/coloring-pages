@@ -1,5 +1,5 @@
 "use client";
-import { createTheme } from "@mui/material";
+import { createTheme, responsiveFontSizes } from "@mui/material";
 import { Inter } from "next/font/google";
 
 const inter = Inter({
@@ -7,11 +7,11 @@ const inter = Inter({
   weight: ["100", "200", "300", "500", "700"],
 });
 
-export const theme = createTheme({
+export const basicTheme = createTheme({
   palette: {
     mode: "light",
     primary: {
-      main: "#00cc00",
+      main: "#4CBB17",
     },
     secondary: {
       main: "#9c27b0",
@@ -24,11 +24,14 @@ export const theme = createTheme({
       primary: "#333333",
       secondary: "#757575",
     },
+    warning: {
+      main: "#C70000",
+    },
   },
   typography: {
     fontFamily: inter.style.fontFamily,
     h1: {
-      fontSize: "2.5rem",
+      fontSize: "2.8rem",
       fontWeight: 200,
     },
     h2: {
@@ -45,6 +48,7 @@ export const theme = createTheme({
     },
     body1: {
       fontSize: "1rem",
+      fontWeight: 300,
       lineHeight: 1.5,
     },
     body2: {
@@ -52,20 +56,6 @@ export const theme = createTheme({
       lineHeight: 1.43,
     },
   },
-  components: {
-    MuiButton: {
-      styleOverrides: {
-        root: {
-          borderRadius: "8px",
-          padding: "8px 16px",
-        },
-        outlinedPrimary: {
-          color: "#ffff0",
-          "&:hover": {
-            backgroundColor: "#d6f5d6",
-          },
-        },
-      },
-    },
-  },
 });
+
+export const theme = responsiveFontSizes(basicTheme);
