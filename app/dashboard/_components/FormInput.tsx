@@ -8,7 +8,7 @@ import {
   Grid2,
   useMediaQuery,
 } from "@mui/material";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import PopularBtns from "./PopularBtns";
 import { generateImage } from "../actions";
 import CardImage from "./CardImage";
@@ -17,28 +17,23 @@ import { useTheme } from "@mui/material/styles";
 import Modal from "./Modal";
 import { ImageObj } from "@/types";
 
-const dummyData = [
-  {
-    id: "1",
-    url: "https://replicate.delivery/czjl/F8wvvjeL6RzOEiVVwCgv1VOICxhB7yEH4a53aFPqYY6AAJ5JA/output.jpg",
-    inputText: "Life blooms when kindness leads the way every single day",
-  },
-  {
-    id: "2",
-    url: "https://replicate.delivery/czjl/F8wvvjeL6RzOEiVVwCgv1VOICxhB7yEH4a53aFPqYY6AAJ5JA/output.jpg",
-    inputText: "indness leads the way every single day Life blooms when k",
-  },
-];
-
 export function FormInput() {
   const [input, setInput] = useState("");
   const [isLoading, setIsLoading] = useState(false);
-  const [images, setImages] = useState<ImageObj[]>(dummyData);
   const [error, setError] = useState("");
   const [showModal, setShowModal] = useState(false);
   const handleClose = () => setShowModal(false);
   const theme = useTheme();
   const smallScreen = useMediaQuery(theme.breakpoints.down("md"));
+  const [images, setImages] = useState<ImageObj[]>([]);
+
+  useEffect(() => {
+    setImages(JSON.parse(localStorage.getItem("images") || "[]"));
+  }, []);
+
+  useEffect(() => {
+    localStorage.setItem("images", JSON.stringify(images));
+  }, [images]);
 
   function handleOnChange(e: React.ChangeEvent<HTMLInputElement>) {
     if (e.target.value.length < 50) setInput(e.target.value);
@@ -51,13 +46,13 @@ export function FormInput() {
       data: AiResponse;
       error: string;
     };
-    const { id, url, inputText, status, error } = data;
+    const { id, url, inputText, status, error: generationError } = data;
     const imageObj = { id, url, inputText };
-    
+
     if (!resError && status === "succeeded") {
       setImages([...images, imageObj]);
     } else {
-      const message = status !== "succeeded" ? error : resError;
+      const message = status !== "succeeded" ? generationError : resError;
       setIsLoading(false);
       setError(message as string);
     }
@@ -67,6 +62,8 @@ export function FormInput() {
     setShowModal(true);
   }
   function handleDeleteClick(id: string) {
+    const filtered = images.filter((images) => images.id !== id);
+
     setImages(images.filter((images) => images.id !== id));
   }
 
@@ -128,6 +125,7 @@ export function FormInput() {
         </Box>
       </FormControl>
       <Card
+        suppressHydrationWarning
         variant="outlined"
         sx={{
           minHeight: "500px",

@@ -28,7 +28,7 @@ export async function POST(req: NextRequest) {
   // { "id": "xyz...", "status": "processing", ... }
   while (!["succeeded", "failed", "canceled"].includes(latest.status)) {
     latest = await replicate.predictions.get(prediction.id);
-    // Wait for 2 seconds and then try again.
+    // Wait for 1 second and then try again.
     await new Promise((resolve) => setTimeout(resolve, 1000));
   }
   const { id, output, error, status } = latest;

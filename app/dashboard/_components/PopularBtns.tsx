@@ -40,7 +40,9 @@ export default function PopularBtns({ state }: { state: State }) {
           <Chip
             key={item}
             label={item}
-            onClick={() => setInput(input + " " + item)}
+            onClick={() =>
+              setInput(input.length > 0 ? input + " " + item : item)
+            }
             size="small"
             sx={{
               backgroundColor: "lightgreen",
