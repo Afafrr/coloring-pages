@@ -43,6 +43,7 @@ export function FormInput({ limit }: { limit: number }) {
   async function handleClick() {
     setIsLoading(true);
     setShowModal(false);
+    setError('')
     const response = await generateImage(input, images.length);
     const { data, error: resError } = response as {
       data: AiResponse | null;
