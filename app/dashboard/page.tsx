@@ -1,10 +1,10 @@
-import { Typography, Box } from "@mui/material";
+import { Typography, Box, Container } from "@mui/material";
 import { FormInput } from "./_components/FormInput";
 import config from "@/config";
 export default async function Page() {
   return (
-    <Box sx={{ mx: { xs: "3px", md: "20px" } }}>
-      <Box sx={{ m: { xs: "10px", md: "20px" } }}>
+    <Container maxWidth="lg" sx={{ mx: { xs: "3px", md: "20px" } }}>
+      <Box sx={{ mx: "auto", m: { xs: "10px", md: "20px" } }}>
         <Typography variant="h3" sx={{ fontWeight: "bold" }}>
           Stwórz kolorowankę
         </Typography>
@@ -14,6 +14,6 @@ export default async function Page() {
         </Typography>
         <FormInput limit={config.IMAGE_LIMIT} />
       </Box>
-    </Box>
+    </Container>
   );
 }

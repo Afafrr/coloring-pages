@@ -16,11 +16,6 @@ export default function RootLayout({
     <html lang="pl">
       <body>
         <ThemeProvider theme={theme}>
-          <link
-            rel="icon"
-            href="@/public/favicon/favicon-kid.webp"
-            sizes="any"
-          />
           {children}
         </ThemeProvider>
       </body>

@@ -1,4 +1,4 @@
-import { Box, Typography, Chip } from "@mui/material";
+import { Box, Typography, Chip, useTheme } from "@mui/material";
 
 type State = {
   input: string;
@@ -7,6 +7,7 @@ type State = {
 
 export default function PopularBtns({ state }: { state: State }) {
   const { input, setInput } = state;
+  const { palette } = useTheme();
   const trendingSet = new Set([
     "bluey",
     "swinka peppa",
@@ -44,11 +45,12 @@ export default function PopularBtns({ state }: { state: State }) {
               setInput(input.length > 0 ? input + " " + item : item)
             }
             size="small"
+            variant="outlined"
             sx={{
-              backgroundColor: "lightgreen",
               fontSize: "0.7rem",
               fontWeight: "400",
               height: "100%",
+              "&:hover": { color: palette.secondary.main },
             }}
           />
         ))}
