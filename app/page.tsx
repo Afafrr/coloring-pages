@@ -7,6 +7,7 @@ import { Shadows_Into_Light_Two } from "next/font/google";
 import NavButton from "./_components/NavButton";
 import ShowcaseCard from "./_components/ShowcaseCard";
 import { showcaseCardsData } from "./assets/showcaseCardData";
+import Footer from "./_components/Footer";
 
 const comic = Shadows_Into_Light_Two({
   subsets: ["latin"],
@@ -142,7 +143,7 @@ export default function Home() {
           })}
         </Box>
       </Container>
-      <footer></footer>
+      <Footer />
     </Box>
   );
 }

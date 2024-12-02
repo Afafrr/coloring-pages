@@ -3,7 +3,7 @@ import React from "react";
 import { Button } from "@mui/material";
 import { useRouter } from "next/navigation";
 
-const NavButton = () => {
+function NavButton() {
   const router = useRouter();
 
   return (
@@ -15,6 +15,6 @@ const NavButton = () => {
       Przejdź dalej
     </Button>
   );
-};
+}
 
 export default NavButton;
