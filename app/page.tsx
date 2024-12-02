@@ -90,6 +90,7 @@ export default function Home() {
           display: "flex",
           flexDirection: "column",
           width: "100%",
+          mt: { xs: "40px", md: "60px" },
         }}
       >
         <Typography variant="h2" fontWeight={500} sx={{ mt: "50px" }}>
@@ -100,8 +101,8 @@ export default function Home() {
             display: "flex",
             flexDirection: "column",
             gap: "50px",
-            mt: "40px",
             overflow: "hidden",
+            mt: { xs: "60px", md: "100px" },
           }}
         >
           {showcaseCardsData.map((card, index) => {
@@ -117,7 +118,7 @@ export default function Home() {
                   },
                   justifyContent: `${isEven ? "start" : "end"}`,
                   alignItems: "center",
-                  gap: "10px",
+                  gap: "20px",
                 }}
               >
                 <ShowcaseCard images={card} />

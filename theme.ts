@@ -11,10 +11,11 @@ export const basicTheme = createTheme({
   palette: {
     mode: "light",
     primary: {
-      main: "#4CBB17",
+      // main: "#4CBB17",
+      main: "#9370DB",
     },
     secondary: {
-      main: "#9c27b0",
+      main: "#BA55D3",
     },
     background: {
       default: "#f5f5f5",
@@ -44,15 +45,15 @@ export const basicTheme = createTheme({
     },
     h4: {
       fontSize: "1.2rem",
-      fontWeight: 200,
     },
     body1: {
-      fontSize: "1rem",
+      fontSize: "1.2rem",
       fontWeight: 300,
       lineHeight: 1.5,
     },
     body2: {
-      fontSize: "0.875rem",
+      fontSize: "1rem",
+      fontWeight: 300,
       lineHeight: 1.43,
     },
   },
