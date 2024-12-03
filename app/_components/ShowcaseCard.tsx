@@ -3,6 +3,8 @@ import Image from "next/image";
 import { Box } from "@mui/material";
 import { Card } from "@mui/material";
 import { StaticImageData } from "next/image";
+import styles from "../styles/home.module.css";
+
 type cardProps = {
   image1: StaticImageData;
   image2: StaticImageData;
@@ -14,6 +16,7 @@ function ShowcaseCard({ images }: { images: cardProps }) {
 
   return (
     <Box
+      className={styles.scrollAnimation}
       sx={{
         display: "flex",
         transform: "translateY(-10px)",

@@ -8,6 +8,7 @@ import NavButton from "./_components/NavButton";
 import ShowcaseCard from "./_components/ShowcaseCard";
 import { showcaseCardsData } from "./assets/showcaseCardData";
 import Footer from "./_components/Footer";
+import BackgroundEffect from "./_components/BackgroundEffect";
 
 const comic = Shadows_Into_Light_Two({
   subsets: ["latin"],
@@ -17,12 +18,15 @@ const comic = Shadows_Into_Light_Two({
 export default function Home() {
   return (
     <Box>
+      <BackgroundEffect color="#acecff" className={styles.backgroundEffect1} />
+      <BackgroundEffect color="#feffac" className={styles.backgroundEffect2} />
       <Box
         component="section"
         sx={{
           position: "relative",
           maxHeight: "100vh",
           height: "100%",
+          overflow: "hidden",
         }}
       >
         <Container

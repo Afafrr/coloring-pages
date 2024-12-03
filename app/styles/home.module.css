@@ -36,6 +36,19 @@
   -webkit-text-fill-color: transparent;
 }
 
+/* .scrollAnimation {
+  animation: imageScrollEffect linear;
+  animation-timeline: view();
+  animation-range: entry 0% cover 100%;
+} */
+.backgroundEffect1 {
+  animation: float1 30s linear infinite;
+  animation-direction: reverse;
+}
+.backgroundEffect2 {
+  animation: float2 40s linear infinite;
+}
+
 @media (max-width: 600px) {
   .sunImage {
     height: auto;
@@ -57,9 +70,49 @@
   }
 }
 
-@keyframes floating {
+@keyframes imageScrollEffect {
   from {
+    opacity: 0;
+    scale: 0.5;
   }
   to {
+    opacity: 1;
+    scale: 1;
+  }
+}
+
+@keyframes float1 {
+  0% {
+    transform: translate(50vw, 0vh) scale(0.6);
+  }
+  25% {
+    transform: translate(80vw, 50vh) scale(1);
+  }
+  50% {
+    transform: translate(40vw, 80vh) scale(1.5);
+  }
+  75% {
+    transform: translate(0vw, 40vh) scale(1);
+  }
+  100% {
+    transform: translate(50vw, 0vh) scale(0.6);
+  }
+
+}
+@keyframes float2 {
+  0% {
+    transform: translate(80vw, 10vh) scale(0.6);
+  }
+  25% {
+    transform: translate(70vw, 80vh) scale(0.8);
+  }
+  50% {
+    transform: translate(80vw, 10vh) scale(0.6);
+  }
+  75% {
+    transform: translate(0vw, 0vh) scale(0.8);
+  }
+  100% {
+    transform: translate(80vw, 10vh) scale(0.6);
   }
 }
