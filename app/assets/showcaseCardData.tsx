@@ -3,8 +3,18 @@ import shrek from "@/public/Home/showcase/shrek.jpg";
 import cars from "@/public/Home/showcase/cars.jpg";
 import harry from "@/public/Home/showcase/harry-potter (1).jpg";
 import scooby from "@/public/Home/showcase/scoobydoo.jpg";
+import { StaticImageData } from "next/image";
 
-export const showcaseCardsData = [
+export type CardProps = {
+  title: string;
+  description: string;
+  image1: StaticImageData;
+  image2: StaticImageData;
+  alt1: string;
+  alt2: string;
+};
+
+export const showcaseCardsData: CardProps[] = [
   {
     title: "Ożyw swoje ulubione postacie z bajek",
     description:

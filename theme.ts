@@ -52,7 +52,7 @@ export const basicTheme = createTheme({
       lineHeight: 1.5,
     },
     body2: {
-      fontSize: "1rem",
+      fontSize: "1.2rem",
       fontWeight: 300,
     },
     subtitle2: {
