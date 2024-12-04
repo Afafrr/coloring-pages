@@ -42,11 +42,11 @@
   animation-range: entry 0% cover 100%;
 } */
 .backgroundEffect1 {
-  animation: float1 30s linear infinite;
+  animation: float1 25s linear infinite;
   animation-direction: reverse;
 }
 .backgroundEffect2 {
-  animation: float2 40s linear infinite;
+  animation: float2 25s linear infinite;
 }
 
 @media (max-width: 600px) {

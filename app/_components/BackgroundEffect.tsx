@@ -11,15 +11,16 @@ function BackgroundEffect({
     <Box
       className={className}
       sx={{
+        display: { xs: "none", md: "block" },
         position: "fixed",
         top: "-100px",
         left: "-100px",
-        height: { xs: "100px", md: "550px" },
-        width: { xs: "100px", md: "550px" },
+        height: "510px",
+        width: "510px",
         borderRadius: "50%",
         backgroundColor: color,
         zIndex: "-100",
-        filter: "blur(130px)",
+        filter: "blur(200px)",
       }}
     ></Box>
   );
