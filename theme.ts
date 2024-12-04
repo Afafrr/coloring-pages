@@ -47,7 +47,7 @@ export const basicTheme = createTheme({
       fontSize: "1.2rem",
     },
     body1: {
-      fontSize: "1.2rem",
+      fontSize: "1rem",
       fontWeight: 300,
       lineHeight: 1.5,
     },
@@ -58,6 +58,15 @@ export const basicTheme = createTheme({
     subtitle2: {
       fontSize: "0.7rem",
       fontWeight: 300,
+    },
+  },
+  components: {
+    MuiButton: {
+      styleOverrides: {
+        root: {
+          fontSize: "1rem",
+        },
+      },
     },
   },
 });

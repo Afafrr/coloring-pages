@@ -8,6 +8,7 @@ import {
   Grid2,
   useMediaQuery,
 } from "@mui/material";
+
 import React, { useEffect, useState } from "react";
 import PopularBtns from "./PopularBtns";
 import { generateImage } from "../actions";
@@ -17,6 +18,7 @@ import { useTheme } from "@mui/material/styles";
 import Modal from "./Modal";
 import { ImageObj } from "@/types";
 import LimitInfo from "./LimitInfo";
+import CustomAlert from "./CustomAlert";
 
 export function FormInput({ limit }: { limit: number }) {
   const [input, setInput] = useState("");
@@ -70,6 +72,7 @@ export function FormInput({ limit }: { limit: number }) {
 
   return (
     <>
+      {error && <CustomAlert severity="error" message={error} />}
       <FormControl
         sx={{
           display: "flex",
@@ -77,7 +80,6 @@ export function FormInput({ limit }: { limit: number }) {
           mt: "10px",
         }}
       >
-        {error}
         <Box
           sx={{
             display: "flex",
