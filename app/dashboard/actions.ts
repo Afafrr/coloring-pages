@@ -11,15 +11,14 @@ export async function generateImage(
       body: JSON.stringify({ prompt, imagesNum }),
     });
     const data = await response.json();
+    if (!response.ok) throw new Error(response.statusText);
 
-    if (!response.ok) {
-      return { error: response.statusText, data: null };
-    }
     return { error: "", data: data };
   } catch (error) {
     let message = "Unknown Error";
     if (error instanceof Error) message = error.message;
-    console.error(message);
+    console.error(message, "asddddddddddddd");
+    
     return { error: message, data: null };
   }
 }

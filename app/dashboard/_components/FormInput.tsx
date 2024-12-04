@@ -43,15 +43,15 @@ export function FormInput({ limit }: { limit: number }) {
   async function handleClick() {
     setIsLoading(true);
     setShowModal(false);
-    setError('')
+    setError("");
     const response = await generateImage(input, images.length);
-    const { data, error: resError } = response as {
+    const { data, error } = response as {
       data: AiResponse | null;
       error: string;
     };
 
-    if (resError || !data)
-      setError((resError as string) || "Wystąpił nieznany problem");
+    if (error || !data)
+      setError((error as string) || "Wystąpił nieznany problem");
     else {
       const { id, url, inputText } = data;
       const imageObj = { id, url, inputText };
@@ -131,7 +131,7 @@ export function FormInput({ limit }: { limit: number }) {
         suppressHydrationWarning
         variant="outlined"
         sx={{
-          minHeight: "500px",
+          minHeight: "400px",
           mt: "20px",
           padding: { xs: "8px", sm: "15px" },
           backgroundColor: "#ffffff",
