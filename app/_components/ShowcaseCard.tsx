@@ -37,15 +37,7 @@ function ShowcaseCard({ images }: { images: cardProps }) {
           },
         }}
       >
-        <Image
-          fill
-          src={image1}
-          alt={alt1}
-          style={{
-            objectFit: "cover",
-          }}
-          quality={1}
-        />
+        <Image fill src={image1} alt={alt1} sizes="150px" quality={1} />
       </Card>
       <Card
         sx={{
@@ -60,15 +52,7 @@ function ShowcaseCard({ images }: { images: cardProps }) {
           },
         }}
       >
-        <Image
-          fill
-          src={image2}
-          alt={alt2}
-          style={{
-            objectFit: "cover",
-          }}
-          quality={10}
-        />
+        <Image fill src={image2} alt={alt2} sizes="150px" quality={10} />
       </Card>
     </Box>
   );

@@ -11,7 +11,7 @@ function BackgroundEffect({
     <Box
       className={className}
       sx={{
-        display: { xs: "none", md: "block" },
+        display: { xs: "none", sm: "block" },
         position: "fixed",
         top: "-100px",
         left: "-100px",
@@ -20,7 +20,7 @@ function BackgroundEffect({
         borderRadius: "50%",
         backgroundColor: color,
         zIndex: "-100",
-        filter: "blur(200px)",
+        filter: "blur(230px)",
       }}
     ></Box>
   );
