@@ -11,7 +11,6 @@ function ShowcaseCard({ card, index }: { card: CardProps; index: number }) {
 
   return (
     <Box
-      key={index}
       sx={{
         display: "flex",
         flexDirection: {

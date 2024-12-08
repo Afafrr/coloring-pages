@@ -111,7 +111,7 @@ export default function Home() {
           }}
         >
           {showcaseCardsData.map((card, index) => (
-            <ShowcaseCard card={card} index={index} />
+            <ShowcaseCard key={index} card={card} index={index} />
           ))}
         </Box>
       </Container>
