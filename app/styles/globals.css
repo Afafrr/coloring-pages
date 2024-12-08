@@ -2,6 +2,7 @@ html,
 body {
   position: relative;
   max-width: 2160px;
+  min-height: 100%;
 }
 
 * {
