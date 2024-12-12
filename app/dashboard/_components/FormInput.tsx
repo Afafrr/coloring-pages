@@ -8,17 +8,16 @@ import {
   Grid2,
   useMediaQuery,
 } from "@mui/material";
-
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import PopularBtns from "./PopularBtns";
 import { generateImage } from "../actions";
 import CardImage from "./CardImage";
 import { AiResponse } from "@/types";
 import { useTheme } from "@mui/material/styles";
 import Modal from "./Modal";
-import { ImageObj } from "@/types";
 import LimitInfo from "./LimitInfo";
 import CustomAlert from "./CustomAlert";
+import { AppContext } from "@/app/_context/imagesContext";
 
 export function FormInput({ limit }: { limit: number }) {
   const [input, setInput] = useState("");
@@ -28,12 +27,12 @@ export function FormInput({ limit }: { limit: number }) {
   const handleClose = () => setShowModal(false);
   const theme = useTheme();
   const smallScreen = useMediaQuery(theme.breakpoints.down("md"));
-  const [images, setImages] = useState<ImageObj[]>([]);
+  const { images, setImages } = useContext(AppContext);
 
+  //effects for managing localStorage
   useEffect(() => {
     setImages(JSON.parse(localStorage.getItem("images") || "[]"));
   }, []);
-
   useEffect(() => {
     localStorage.setItem("images", JSON.stringify(images));
   }, [images]);
@@ -62,10 +61,11 @@ export function FormInput({ limit }: { limit: number }) {
     setIsLoading(false);
   }
 
-  //if text length shorter than 3
+  //if text length shorter than 3, then emptyInputHandler is fired
   function emptyInputHandler() {
     setShowModal(true);
   }
+  
   function handleDeleteClick(id: string) {
     setImages(images.filter((images) => images.id !== id));
   }

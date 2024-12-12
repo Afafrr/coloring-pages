@@ -1,7 +1,8 @@
 import { ReactNode } from "react";
+import { AppContextProvider } from "../_context/imagesContext";
 
 const layout = ({ children }: { children: ReactNode }) => {
-  return <>{children}</>;
+  return <AppContextProvider>{children}</AppContextProvider>;
 };
 
 export default layout;
