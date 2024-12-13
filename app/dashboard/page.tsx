@@ -9,6 +9,7 @@ export default async function Page() {
       maxWidth="xl"
       sx={{
         display: "flex",
+        gap: { md: "10px", xl: "50px" },
         minHeight: "100vh",
         height: "100%",
         width: "100%",
