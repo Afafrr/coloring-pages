@@ -8,7 +8,7 @@ export default async function Page() {
     <Container
       maxWidth="xl"
       sx={{
-        display: "flex",
+        display: { xs: "auto", md: "flex" },
         gap: { md: "10px", xl: "50px" },
         minHeight: "100vh",
         height: "100%",
