@@ -19,7 +19,7 @@ export default async function Page() {
       <Box
         sx={{
           flex: 1,
-          m: { xs: "10px", md: "20px" },
+          p: { xs: "10px", md: "20px" },
         }}
       >
         <Typography variant="h3" sx={{ fontWeight: "bold" }}>
