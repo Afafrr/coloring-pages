@@ -16,7 +16,7 @@ export async function POST(req: NextRequest) {
 
     const reqPromptText: string =
       prompt || "popular random animated fairy tale character";
-    const promptText = `Create a page for kids, with ${reqPromptText}, the image shoud have only the black outlines, don't color it, black and white image with sharp and thick edges, fill the whole page`;
+    const promptText = `Create a page for kids, with ${reqPromptText}, the image shoud have only the black outlines, white fill, black and white image with sharp and thick edges, fill the whole page`;
 
     const input = {
       prompt: promptText,
