@@ -56,7 +56,7 @@ export const basicTheme = createTheme({
       fontWeight: 300,
     },
     subtitle2: {
-      fontSize: "0.7rem",
+      fontSize: "0.8rem",
       fontWeight: 300,
     },
   },

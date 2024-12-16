@@ -1,12 +1,24 @@
 "use client";
-import { Box, Button, Paper, Typography, useTheme } from "@mui/material";
+import {
+  Box,
+  Button,
+  Paper,
+  Tooltip,
+  Typography,
+  useTheme,
+} from "@mui/material";
 import { AppContext } from "@/app/_context/imagesContext";
 import { useRouter } from "next/navigation";
 import { useContext } from "react";
+import { priceCalc } from "@/app/utils/priceCalculation";
+import config from "@/config";
+const { MIN_IMAGES_REQUIRED } = config;
 
 function Checkout() {
   const { palette } = useTheme();
   const router = useRouter();
+  const { images } = useContext(AppContext);
+  const isBelowLimit = images.length < MIN_IMAGES_REQUIRED;
 
   return (
     <Paper
@@ -98,23 +110,43 @@ function Checkout() {
             </Box>
           </Box>
         </Box>
-        <Button
-          variant="outlined"
-          color="secondary"
-          onClick={() => router.push("/checkout")}
-          sx={{
-            position: "relative",
-            height: { xs: "100px", md: "50px" },
-            width: { xs: "120px", md: "100%" },
-            left: { xs: "auto", md: "50%" },
-            transform: { xs: "auto", md: "translateX(-50%)" },
-            mt: { xs: "0px", md: "20px" },
-            color: "white",
-            backgroundColor: "black",
-          }}
+        <Tooltip
+          title={
+            isBelowLimit
+              ? `Minimalna ilośc obrazów to ${MIN_IMAGES_REQUIRED}`
+              : "Przejdź do kupna"
+          }
         >
-          Kup
-        </Button>
+          <Box
+            sx={{
+              position: "relative",
+              height: { xs: "100px", md: "50px" },
+              width: { xs: "120px", md: "100%" },
+              left: { xs: "auto", md: "50%" },
+              transform: { xs: "auto", md: "translateX(-50%)" },
+              mt: { xs: "0px", md: "20px" },
+            }}
+          >
+            <Button
+              variant="outlined"
+              color="secondary"
+              disabled={isBelowLimit}
+              onClick={() => router.push("/checkout")}
+              sx={{
+                width: "100%",
+                height: "100%",
+                color: "white",
+                backgroundColor: "black",
+                "&.Mui-disabled": {
+                  backgroundColor: "grey",
+                  color: "lightgrey",
+                },
+              }}
+            >
+              Kup
+            </Button>
+          </Box>
+        </Tooltip>
       </Box>
     </Paper>
   );
@@ -124,6 +156,9 @@ export default Checkout;
 
 function PriceComp() {
   const { images } = useContext(AppContext);
+  const price = priceCalc(images.length);
+
+  const isBelowLimit = images.length < MIN_IMAGES_REQUIRED;
 
   const Price = () => (
     <>
@@ -132,22 +167,20 @@ function PriceComp() {
         fontWeight={500}
         sx={{ display: { xs: "block", sm: "inline" } }}
       >
-        Cena produktów:{" "}
+        {isBelowLimit ? "Niewystarczająca ilośc produktów" : "Cena produktów: "}
       </Typography>
       <Typography
         variant="body2"
         fontWeight={500}
         sx={{ display: { xs: "block", sm: "inline" } }}
       >
-        20 zł
+        {isBelowLimit ? "" : price + " zł"}
       </Typography>
     </>
   );
 
   return (
-    <Box sx={{ mt: "15px" }}>
-      {images.length + 1 ? <Price /> : <EmptyCart />}
-    </Box>
+    <Box sx={{ mt: "15px" }}>{images.length ? <Price /> : <EmptyCart />}</Box>
   );
 }
 

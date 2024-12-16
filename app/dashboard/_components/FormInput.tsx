@@ -7,6 +7,7 @@ import {
   Card,
   Grid2,
   useMediaQuery,
+  Typography,
 } from "@mui/material";
 import React, { useContext, useEffect, useState } from "react";
 import PopularBtns from "./PopularBtns";
@@ -129,12 +130,15 @@ export function FormInput({ limit }: { limit: number }) {
           </Box>
         </Box>
       </FormControl>
+      <Typography variant="subtitle2" sx={{ mt: "10px" }}>
+        Obrazy są przechowywane do 24h!
+      </Typography>
       <Card
         suppressHydrationWarning
         variant="outlined"
         sx={{
           minHeight: "400px",
-          mt: "20px",
+          mt: "10px",
           padding: { xs: "8px", sm: "15px" },
           backgroundColor: "#ffffff",
         }}
