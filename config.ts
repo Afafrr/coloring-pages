@@ -1,4 +1,5 @@
 const config = {
-  IMAGE_LIMIT: 3,
+  MIN_IMAGES_REQUIRED: 2,
+  IMAGE_LIMIT: 5,
 };
 export default config;
