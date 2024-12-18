@@ -11,7 +11,7 @@ import {
 } from "@mui/material";
 import React, { useContext, useEffect, useState } from "react";
 import PopularBtns from "./PopularBtns";
-import { generateImage } from "../actions";
+import { generateImage } from "@/app/actions/replicateActions";
 import CardImage from "./CardImage";
 import { AiResponse } from "@/types";
 import { useTheme } from "@mui/material/styles";
@@ -66,7 +66,7 @@ export function FormInput({ limit }: { limit: number }) {
   function emptyInputHandler() {
     setShowModal(true);
   }
-  
+
   function handleDeleteClick(id: string) {
     setImages(images.filter((images) => images.id !== id));
   }
