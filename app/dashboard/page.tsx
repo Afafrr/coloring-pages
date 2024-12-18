@@ -2,6 +2,7 @@ import { Typography, Box, Container } from "@mui/material";
 import { FormInput } from "./_components/FormInput";
 import config from "@/config";
 import Checkout from "./_components/Checkout";
+import Navbar from "./_components/Navbar";
 
 export default async function Page() {
   return (
@@ -16,16 +17,17 @@ export default async function Page() {
         pr: { xs: "auto", md: "0px" },
       }}
     >
+      <Navbar />
       <Box
         sx={{
           flex: 1,
           p: { xs: "10px", md: "20px" },
         }}
       >
-        <Typography variant="h3" sx={{ fontWeight: "bold" }}>
+        <Typography variant="h4" sx={{ mt: "50px" }}>
           Stwórz kolorowankę
         </Typography>
-        <Typography sx={{ maxWidth: "600px", width: "100%", mt: "20px" }}>
+        <Typography sx={{ maxWidth: "600px", width: "100%", mt: "10px" }}>
           Możesz wpisać nazwę postaci, czynność jaką ma robić, scenerię w jakiej
           ma się znajdować i wiele innych!
         </Typography>

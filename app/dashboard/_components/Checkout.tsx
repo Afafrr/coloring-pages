@@ -26,11 +26,11 @@ function Checkout() {
       elevation={2}
       sx={{
         position: { xs: "fixed", md: "relative" },
-        width: { xs: "100%", md: "250px", lg: "300px" },
-        minHeight: { xs: "100px", md: "auto" },
         bottom: "0px",
         left: { xs: "0px", md: "auto" },
-        p: 2,
+        width: { xs: "100%", md: "250px", lg: "300px" },
+        minHeight: { xs: "80px", md: "auto" },
+        p: { xs: 1, md: 2 },
         pt: { md: "30px" },
         backgroundColor: palette.primary.main,
         textShadow: "2px 2px 1px grey",
@@ -120,8 +120,8 @@ function Checkout() {
           <Box
             sx={{
               position: "relative",
-              height: { xs: "100px", md: "50px" },
-              width: { xs: "120px", md: "100%" },
+              height: { xs: "80px", md: "50px" },
+              width: { xs: "100px", md: "100%" },
               left: { xs: "auto", md: "50%" },
               transform: { xs: "auto", md: "translateX(-50%)" },
               mt: { xs: "0px", md: "20px" },
