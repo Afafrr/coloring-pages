@@ -4,6 +4,7 @@ import { useForm, Controller } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
 import { useEffect, useState } from "react";
+import { manageCustomer } from "../actions/customerActions";
 
 const schema = yup.object({
   email: yup
@@ -19,8 +20,8 @@ function EmailForm() {
   });
   const [error, setError] = useState(false);
 
-  const onSubmit = (data: { email: string }) => {
-    console.log(data);
+  const onSubmit = async (data: { email: string }) => {
+    const { error, customer } = await manageCustomer(data.email);
   };
 
   return (
