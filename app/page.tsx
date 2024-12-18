@@ -4,11 +4,11 @@ import sunSvg from "@/public/Home/sunSvg.svg";
 import mountainSvg from "@/public/Home/mountainSvg.svg";
 import styles from "./styles/home.module.css";
 import { Shadows_Into_Light_Two } from "next/font/google";
-import NavButton from "./_components/NavButton";
 import ShowcaseCard from "./_components/ShowcaseCard";
 import { showcaseCardsData } from "./assets/showcaseCardData";
 import Footer from "./_components/Footer";
 import BackgroundEffect from "./_components/BackgroundEffect";
+import EmailForm from "./_components/EmailForm";
 
 const comic = Shadows_Into_Light_Two({
   subsets: ["latin"],
@@ -48,10 +48,9 @@ export default function Home() {
             sx={{
               display: "flex",
               flexDirection: "column",
-              justifyContent: "center",
+              position: "relative",
               alignItems: "center",
               textAlign: "center",
-              mb: "50px",
             }}
           >
             <Typography
@@ -80,13 +79,13 @@ export default function Home() {
               Wpisz postać, scenę czy krajobraz, a sztuczna inteligencja
               wygeneruje dla ciebie obrazy
             </Typography>
-            <NavButton />
-            <Image
-              src={mountainSvg}
-              alt="Rysunek gór"
-              className={styles.mountainImage}
-            />
+            <EmailForm />
           </Box>
+          <Image
+            src={mountainSvg}
+            alt="Rysunek gór"
+            className={styles.mountainImage}
+          />
         </Container>
       </Box>
       <Container
