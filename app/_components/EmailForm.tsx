@@ -1,5 +1,6 @@
 "use client";
 import { TextField, Box, Button } from "@mui/material";
+import CircularProgress from "@mui/material/CircularProgress";
 import { useForm, Controller } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
@@ -22,9 +23,11 @@ function EmailForm() {
     defaultValues: { email: cookies.get("email") || "" },
   });
   const [error, setError] = useState("");
+  const [isLoading, setIsLoading] = useState(false);
   const router = useRouter();
 
   const onSubmit = async ({ email }: { email: string }) => {
+    setIsLoading(true);
     const { error, customer } = await manageCustomer(email);
     console.log({ customer, error });
     if (error) {
@@ -41,6 +44,7 @@ function EmailForm() {
       });
       router.push("/dashboard");
     }
+    setIsLoading(false);
   };
 
   return (
@@ -73,13 +77,32 @@ function EmailForm() {
             );
           }}
         />
-        <Button
-          type="submit"
-          variant="outlined"
-          sx={{ width: "100%", p: "13px 60px" }}
+        <Box
+          sx={{
+            position: "relative",
+            display: "flex",
+            alignItems: "center",
+          }}
         >
-          Przejdź dalej
-        </Button>
+          <Button
+            type="submit"
+            variant="outlined"
+            disabled={isLoading}
+            sx={{ width: "100%", p: "13px 60px" }}
+          >
+            Przejdź dalej
+          </Button>
+          {isLoading && (
+            <CircularProgress
+              color="primary"
+              size="18px"
+              sx={{
+                position: "absolute",
+                right: "-30px",
+              }}
+            />
+          )}
+        </Box>
       </Box>
     </form>
   );
