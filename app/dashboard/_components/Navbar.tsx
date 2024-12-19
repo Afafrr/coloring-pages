@@ -2,6 +2,7 @@
 import { Container, Paper, Typography } from "@mui/material";
 import { Shadows_Into_Light_Two } from "next/font/google";
 import { useRouter } from "next/navigation";
+import { useCookies } from "next-client-cookies";
 
 const comic = Shadows_Into_Light_Two({
   subsets: ["latin"],
@@ -10,6 +11,8 @@ const comic = Shadows_Into_Light_Two({
 
 function Navbar() {
   const router = useRouter();
+  const cookies = useCookies();
+  const email = cookies.get("email");
   return (
     <Paper
       square
@@ -45,9 +48,12 @@ function Navbar() {
           KOLOROWANKI.ART
         </Typography>
         <Typography
-          sx={{ position: "relative", right: { xs: "0px", md: "300px" } }}
+          sx={{
+            position: "relative",
+            right: { xs: "0px", md: "250px", lg: "300px" },
+          }}
         >
-          asd
+          {email}
         </Typography>
       </Container>
     </Paper>
