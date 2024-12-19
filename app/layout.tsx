@@ -6,6 +6,7 @@ export const metadata: Metadata = {
 };
 import { ThemeProvider } from "@mui/material";
 import { theme } from "@/theme";
+import { CookiesProvider } from "next-client-cookies/server";
 
 export default function RootLayout({
   children,
@@ -15,7 +16,9 @@ export default function RootLayout({
   return (
     <html lang="pl" style={{ overflowX: "hidden" }}>
       <body>
-        <ThemeProvider theme={theme}>{children}</ThemeProvider>
+        <CookiesProvider>
+          <ThemeProvider theme={theme}>{children}</ThemeProvider>
+        </CookiesProvider>
       </body>
     </html>
   );

@@ -5,6 +5,8 @@ import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
 import { useEffect, useState } from "react";
 import { manageCustomer } from "../actions/customerActions";
+import { useCookies } from "next-client-cookies";
+import { useRouter } from "next/navigation";
 
 const schema = yup.object({
   email: yup
@@ -14,14 +16,31 @@ const schema = yup.object({
 });
 
 function EmailForm() {
+  const cookies = useCookies();
   const { handleSubmit, control } = useForm({
     resolver: yupResolver(schema),
-    defaultValues: { email: "" },
+    defaultValues: { email: cookies.get("email") || "" },
   });
-  const [error, setError] = useState(false);
+  const [error, setError] = useState("");
+  const router = useRouter();
 
-  const onSubmit = async (data: { email: string }) => {
-    const { error, customer } = await manageCustomer(data.email);
+  const onSubmit = async ({ email }: { email: string }) => {
+    const { error, customer } = await manageCustomer(email);
+    console.log({ customer, error });
+    if (error) {
+      setError(error.toString() || "Wystąpił nieznany problem");
+    }
+    if (customer) {
+      const date = new Date();
+      //expire the cookie after 10 days
+      const expirationDate = date.getDate() + 10;
+      cookies.set("email", email, {
+        secure: true,
+        sameSite: "Strict",
+        expires: expirationDate,
+      });
+      router.push("/dashboard");
+    }
   };
 
   return (
@@ -33,7 +52,7 @@ function EmailForm() {
           render={({ field, fieldState }) => {
             const errorInner = fieldState.error;
             useEffect(() => {
-              setError(!!errorInner);
+              setError(!!errorInner ? (errorInner?.message as string) : "");
             }, [errorInner]);
 
             return (
@@ -41,8 +60,8 @@ function EmailForm() {
                 label="Email"
                 placeholder="xyz@gmail.com"
                 {...field}
-                error={!!errorInner}
-                helperText={errorInner?.message}
+                error={Boolean(error)}
+                helperText={error}
                 size={"medium"}
                 sx={{
                   width: "100%",
