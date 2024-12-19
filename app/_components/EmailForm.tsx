@@ -13,6 +13,7 @@ const schema = yup.object({
   email: yup
     .string()
     .email("Email nie jest odpowiedni")
+    .matches(/\.[a-zA-Z]{1,}$/, "Email nie jest odpowiedni")
     .required("Uzupełnij email by kontynuować"),
 });
 
@@ -32,6 +33,7 @@ function EmailForm() {
     console.log({ customer, error });
     if (error) {
       setError(error.toString() || "Wystąpił nieznany problem");
+      setIsLoading(false);
     }
     if (customer) {
       const date = new Date();
@@ -44,7 +46,6 @@ function EmailForm() {
       });
       router.push("/dashboard");
     }
-    setIsLoading(false);
   };
 
   return (
@@ -95,7 +96,7 @@ function EmailForm() {
           {isLoading && (
             <CircularProgress
               color="primary"
-              size="18px"
+              size="15px"
               sx={{
                 position: "absolute",
                 right: "-30px",
