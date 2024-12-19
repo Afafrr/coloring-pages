@@ -14,6 +14,7 @@ export default async function Page() {
         minHeight: "100vh",
         height: "100%",
         width: "100%",
+        px: 0,
         pr: { xs: "auto", md: "0px" },
       }}
     >

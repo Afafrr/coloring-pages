@@ -12,7 +12,8 @@ const comic = Shadows_Into_Light_Two({
 function Navbar() {
   const router = useRouter();
   const cookies = useCookies();
-  const email = cookies.get("email");
+  const email = cookies.get("email") || "";
+
   return (
     <Paper
       square
@@ -39,7 +40,7 @@ function Navbar() {
           onClick={() => router.push("/")}
           fontSize={"20px"}
           sx={{
-            pl: { xs: "10px", md: "20px" },
+            pl: { xs: "0px", md: "20px" },
             textShadow: "1px 1px 3px #BA55D3",
             cursor: "pointer",
           }}
@@ -49,7 +50,11 @@ function Navbar() {
         </Typography>
         <Typography
           sx={{
+            display: "flex",
+            flexWrap: "wrap",
+            overflow: "hidden",
             position: "relative",
+            ml: "5px",
             right: { xs: "0px", md: "250px", lg: "300px" },
           }}
         >
