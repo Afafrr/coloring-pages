@@ -1,5 +1,5 @@
 "use client";
-import { Paper, Box, useTheme, Typography, Divider } from "@mui/material";
+import { Box, useTheme, Typography, Divider } from "@mui/material";
 function Footer() {
   const { palette } = useTheme();
   return (

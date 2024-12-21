@@ -33,7 +33,7 @@ export function FormInput({ limit }: { limit: number }) {
   //effects for managing localStorage
   useEffect(() => {
     setImages(JSON.parse(localStorage.getItem("images") || "[]"));
-  }, []);
+  }, [setImages]);
   useEffect(() => {
     localStorage.setItem("images", JSON.stringify(images));
   }, [images]);

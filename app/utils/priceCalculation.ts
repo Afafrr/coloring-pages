@@ -8,6 +8,6 @@ export function priceCalc(itemsNum: number) {
   };
   const discount = discounts[itemsNum] ?? 1;
 
-  let outputPrice = basePrice * itemsNum * discount;
+  const outputPrice = basePrice * itemsNum * discount;
   return outputPrice?.toFixed(2);
 }

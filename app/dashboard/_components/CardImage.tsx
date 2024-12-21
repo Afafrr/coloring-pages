@@ -23,7 +23,8 @@ export default function CardImage({
     <Grid2 size={1}>
       <Box
         onMouseLeave={() => {
-          setZoom(false), setTransitionEnd(true);
+          setZoom(false);
+          setTransitionEnd(true);
         }}
         onTransitionEnd={() =>
           transitionEnd && (setZIndex(false), setTransitionEnd(false))

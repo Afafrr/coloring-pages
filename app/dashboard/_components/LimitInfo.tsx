@@ -1,4 +1,3 @@
-import config from "@/config";
 import { Box, Tooltip, Typography } from "@mui/material";
 
 export default function LimitInfo({
