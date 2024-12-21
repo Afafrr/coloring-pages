@@ -3,7 +3,8 @@ import Image from "next/image";
 import { ImageObj } from "@/types";
 import { Grid2 } from "@mui/material";
 import DeleteForeverIcon from "@mui/icons-material/DeleteForever";
-import DownloadTwoToneIcon from "@mui/icons-material/DownloadTwoTone";
+import ZoomInIcon from "@mui/icons-material/ZoomIn";
+import { Dispatch, SetStateAction, useState } from "react";
 
 export default function CardImage({
   imageObj,
@@ -12,23 +13,45 @@ export default function CardImage({
   imageObj: ImageObj;
   handleDelete: (id: string) => void;
 }) {
+  const [zoom, setZoom] = useState(false);
+  //increasing zIndex on zoom click
+  const [zIndex, setZIndex] = useState(false);
+  //state used to change zIndex after width transition ends
+  const [transitionEnd, setTransitionEnd] = useState(false);
+
   return (
     <Grid2 size={1}>
       <Box
-        onClick={() => console.log("asd")}
+        onMouseLeave={() => {
+          setZoom(false), setTransitionEnd(true);
+        }}
+        onTransitionEnd={() =>
+          transitionEnd && (setZIndex(false), setTransitionEnd(false))
+        }
         sx={{
           position: "relative",
           flex: 1,
-          width: "100%",
+          width: zoom ? "140%" : "100%",
           aspectRatio: "3/4",
           borderRadius: "5px",
-          zIndex: 20,
-          "&:hover .overlay": {
-            opacity: 1,
-          },
+          zIndex: zIndex ? 500 : 100,
+          "&:hover .overlay": zoom
+            ? {
+                display: "none",
+              }
+            : {
+                opacity: 1,
+                display: "flex",
+              },
+          transition: "width 0.3s, zoom 0.3s",
         }}
       >
-        <Overlay imageObj={imageObj} handleDelete={handleDelete} />
+        <Overlay
+          imageObj={imageObj}
+          handleDelete={handleDelete}
+          zoomState={{ zoom, setZoom }}
+          setZIndex={setZIndex}
+        />
         <Image
           priority
           fill
@@ -47,19 +70,25 @@ export default function CardImage({
   );
 }
 
+//Shows overlay on hover of an image
 function Overlay({
   imageObj,
   handleDelete,
+  zoomState,
+  setZIndex,
 }: {
   imageObj: ImageObj;
   handleDelete: (id: string) => void;
+  zoomState: { zoom: boolean; setZoom: Dispatch<SetStateAction<boolean>> };
+  setZIndex: Dispatch<SetStateAction<boolean>>;
 }) {
   const { palette } = useTheme();
+  const { zoom, setZoom } = zoomState;
   return (
     <Box
       className="overlay"
       sx={{
-        display: "flex",
+        display: "none",
         flexDirection: "column",
         justifyContent: "space-between",
         position: "relative",
@@ -69,9 +98,7 @@ function Overlay({
         borderRadius: "5px",
         backgroundColor: "rgba(0, 0, 0, 0.6)",
         backdropFilter: "blur(2px)",
-        transition: "opacity 0.15s",
         zIndex: 10,
-        opacity: 0,
       }}
     >
       <Typography sx={{ color: "white", overflow: "hidden" }}>
@@ -80,6 +107,7 @@ function Overlay({
       <Box
         sx={{
           display: "flex",
+          height: { xs: "50px", sm: "auto" },
           justifyContent: "space-around",
           gap: { xs: "10px", md: "5px" },
         }}
@@ -98,10 +126,10 @@ function Overlay({
             <DeleteForeverIcon />
           </Button>
         </Tooltip>
-
-        <Tooltip title="Pobierz">
+        <Tooltip title="Powiększ">
           <Button
             variant="contained"
+            onClick={() => (setZoom(!zoom), setZIndex(true))}
             sx={{
               flex: 1,
               minWidth: "5px",
@@ -109,7 +137,7 @@ function Overlay({
               backgroundColor: "#eeeeee",
             }}
           >
-            <DownloadTwoToneIcon />
+            <ZoomInIcon />
           </Button>
         </Tooltip>
       </Box>

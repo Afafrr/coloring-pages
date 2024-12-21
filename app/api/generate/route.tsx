@@ -17,7 +17,8 @@ export async function POST(req: NextRequest) {
 
     const reqPromptText: string =
       prompt || "popular random animated fairy tale character";
-    const promptText = `Create a page for kids, with ${reqPromptText}, the image shoud have only the black outlines, white fill, black and white image with sharp and thick edges, fill the whole page`;
+    // const promptText = `Create a page for kids, with ${reqPromptText}, the image shoud have only the black outlines and white filling, black and white image with sharp and thick edges, fill the whole page`;
+    const promptText = `Create black and white page with ${reqPromptText}. The image should only consist of black outlines and white interiors, suitable for coloring. Use thick and sharp edges to make it easy for kids to color. Ensure the design fills the entire page.`;
 
     const input = {
       prompt: promptText,
@@ -40,6 +41,7 @@ export async function POST(req: NextRequest) {
       // Wait for 1 second and then try again.
       await new Promise((resolve) => setTimeout(resolve, 1000));
     }
+
     const { id, output, status, error } = latest;
 
     //transform image to blurred
