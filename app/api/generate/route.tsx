@@ -59,10 +59,10 @@ export async function POST(req: NextRequest) {
       throw new Error(responseObj.error as string);
 
     return NextResponse.json(responseObj, { status: 200 });
-  } catch (error: any) {
+  } catch (error: unknown) {
     return NextResponse.json(
       { error: error || "Internal Server Error" },
-      { status: 500, statusText: error || "Internal Serever Error" }
+      { status: 500, statusText: (error as string) || "Internal Serever Error" }
     );
   }
 }
