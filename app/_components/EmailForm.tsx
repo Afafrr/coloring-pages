@@ -8,6 +8,7 @@ import { useEffect, useState } from "react";
 import { manageCustomer } from "../actions/customerActions";
 import { useCookies } from "next-client-cookies";
 import { useRouter } from "next/navigation";
+import { FieldError } from "react-hook-form";
 
 const schema = yup.object({
   email: yup
@@ -26,6 +27,11 @@ function EmailForm() {
   const [error, setError] = useState("");
   const [isLoading, setIsLoading] = useState(false);
   const router = useRouter();
+  let errorInner: FieldError | undefined;
+
+  useEffect(() => {
+    setError(!!errorInner ? (errorInner?.message as string) : "");
+  }, [errorInner]);
 
   const onSubmit = async ({ email }: { email: string }) => {
     setIsLoading(true);
@@ -55,11 +61,7 @@ function EmailForm() {
           name="email"
           control={control}
           render={({ field, fieldState }) => {
-            const errorInner = fieldState.error;
-            useEffect(() => {
-              setError(!!errorInner ? (errorInner?.message as string) : "");
-            }, [errorInner]);
-
+            errorInner = fieldState.error;
             return (
               <TextField
                 label="Email"
