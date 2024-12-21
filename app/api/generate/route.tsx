@@ -1,6 +1,7 @@
 import { NextRequest, NextResponse } from "next/server";
 import Replicate from "replicate";
 import config from "@/config";
+import { blurImage } from "@/app/utils/blurImage";
 
 const replicate = new Replicate({
   auth: process.env.REPLICATE_API_TOKEN,
@@ -33,18 +34,21 @@ export async function POST(req: NextRequest) {
     });
 
     let latest = await replicate.predictions.get(prediction.id);
-    //if different from starting/processing stauis
+    //if different from starting/processing status
     while (!["succeeded", "failed", "canceled"].includes(latest.status)) {
       latest = await replicate.predictions.get(prediction.id);
       // Wait for 1 second and then try again.
       await new Promise((resolve) => setTimeout(resolve, 1000));
     }
-
     const { id, output, status, error } = latest;
+
+    //transform image to blurred
+    const blurredUrl = await blurImage(output);
+
     const responseObj = {
       id,
       inputText: prompt,
-      url: output,
+      url: blurredUrl,
       error,
       status,
     };

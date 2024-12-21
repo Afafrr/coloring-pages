@@ -30,7 +30,7 @@ function EmailForm() {
   const onSubmit = async ({ email }: { email: string }) => {
     setIsLoading(true);
     const { error, customer } = await manageCustomer(email);
-    console.log({ customer, error });
+
     if (error) {
       setError(error.toString() || "Wystąpił nieznany problem");
       setIsLoading(false);
