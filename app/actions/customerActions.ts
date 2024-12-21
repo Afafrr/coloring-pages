@@ -1,6 +1,6 @@
 type manageCus = Promise<
   | {
-      customer: any;
+      customer: string;
       error?: undefined;
     }
   | {
