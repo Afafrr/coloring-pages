@@ -4,11 +4,10 @@ import CircularProgress from "@mui/material/CircularProgress";
 import { useForm, Controller } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { manageCustomer } from "../actions/customerActions";
 import { useCookies } from "next-client-cookies";
 import { useRouter } from "next/navigation";
-import { FieldError } from "react-hook-form";
 
 const schema = yup.object({
   email: yup
@@ -27,11 +26,6 @@ function EmailForm() {
   const [error, setError] = useState("");
   const [isLoading, setIsLoading] = useState(false);
   const router = useRouter();
-  let errorInner: FieldError | undefined;
-
-  useEffect(() => {
-    setError(!!errorInner ? (errorInner?.message as string) : "");
-  }, [errorInner]);
 
   const onSubmit = async ({ email }: { email: string }) => {
     setIsLoading(true);
@@ -61,19 +55,21 @@ function EmailForm() {
           name="email"
           control={control}
           render={({ field, fieldState }) => {
-            errorInner = fieldState.error;
+            const currentError = !!fieldState.error
+              ? (fieldState.error?.message as string)
+              : "";
             return (
               <TextField
                 label="Email"
                 placeholder="xyz@gmail.com"
                 {...field}
-                error={Boolean(error)}
-                helperText={error}
+                error={Boolean(currentError || error)}
+                helperText={currentError || error}
                 size={"medium"}
                 sx={{
                   width: "100%",
                   p: 0,
-                  height: error ? "85px" : "70px",
+                  height: currentError || error ? "85px" : "70px",
                   transition: "height 0.15s",
                 }}
               />
