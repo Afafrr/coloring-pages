@@ -1,12 +1,11 @@
 import { NextRequest, NextResponse } from "next/server";
 import Stripe from "stripe";
-
-const stripe = new Stripe(process.env.STRIPE_SECRET_KEY as string);
+import { stripeInstance } from "@/app/utils/stripeInstance";
 
 export async function POST(req: NextRequest) {
   try {
     const { email } = await req.json();
-    const { data } = await stripe.customers.search({
+    const { data } = await stripeInstance.customers.search({
       query: `email:'${email}'`,
     });
     const customer = data[0]?.id;
@@ -16,7 +15,7 @@ export async function POST(req: NextRequest) {
     }
     const name = email.split("@")[0];
     //create new customer
-    const newCustomer = await stripe.customers.create({ name, email });
+    const newCustomer = await stripeInstance.customers.create({ name, email });
 
     return NextResponse.json({ customer: newCustomer });
   } catch (error) {
