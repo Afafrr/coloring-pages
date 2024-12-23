@@ -8,6 +8,7 @@ import { useState } from "react";
 import { manageCustomer } from "../actions/customerActions";
 import { useCookies } from "next-client-cookies";
 import { useRouter } from "next/navigation";
+import { CookieAttributes } from "next-client-cookies";
 
 const schema = yup.object({
   email: yup
@@ -39,11 +40,13 @@ function EmailForm() {
       const date = new Date();
       //expire the cookie after 10 days
       const expirationDate = date.getDate() + 10;
-      cookies.set("email", email, {
+      const cookiesOptions: CookieAttributes = {
         secure: true,
         sameSite: "Strict",
         expires: expirationDate,
-      });
+      };
+      cookies.set("email", email, cookiesOptions);
+      cookies.set("customerId", customer, cookiesOptions);
       router.push("/dashboard");
     }
   };
