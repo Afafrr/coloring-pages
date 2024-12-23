@@ -1,5 +1,4 @@
-import { Alert } from "@mui/material";
-import { AlertColor } from "@mui/material";
+import { Alert, AlertTitle, AlertColor, Typography } from "@mui/material";
 
 function CustomAlert({
   message,
@@ -22,7 +21,7 @@ function CustomAlert({
         zIndex: 100,
       }}
     >
-      {message}
+      <Typography variant="subtitle1">{message}</Typography>
     </Alert>
   );
 }
