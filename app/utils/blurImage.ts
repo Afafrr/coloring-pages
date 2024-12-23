@@ -1,6 +1,14 @@
 import sharp from "sharp";
 import { Metadata } from "sharp";
 
+/**
+ * Blurs an image with given url and overlays a watermark.
+ * The blurred image is returned as a base64-encoded JPEG string.
+ *
+ * @param {string} imageUrl
+ * @returns {Promise<{ base64Image?: string; error?: unknown }>} 
+ */
+
 export async function blurImage(imageUrl: string) {
   try {
     const response = await fetch(imageUrl);
@@ -24,9 +32,9 @@ export async function blurImage(imageUrl: string) {
     //create data url from encoded image
     const blurredImage = blurredBuffer.toString("base64");
     const base64Image = `data:image/jpeg;base64,${blurredImage}`;
-    return base64Image;
+    return { base64Image };
   } catch (error) {
-    return error;
+    return { error };
   }
 }
 
