@@ -17,7 +17,7 @@ export async function POST(req: NextRequest) {
     //create new customer
     const newCustomer = await stripeInstance.customers.create({ name, email });
 
-    return NextResponse.json({ customer: newCustomer });
+    return NextResponse.json({ customer: newCustomer.id });
   } catch (error) {
     return NextResponse.json(
       { error: error || "Internal Server Error" },
