@@ -14,11 +14,12 @@ function CustomAlert({
       sx={{
         display: "flex",
         alignItems: "center",
+        width: { xs: "90%", sm: "auto" },
         top: "20px",
         left: "50%",
         transform: "translateX(-50%)",
         position: "absolute",
-        zIndex: 100,
+        zIndex: 400,
       }}
     >
       <Typography variant="subtitle1">{message}</Typography>
