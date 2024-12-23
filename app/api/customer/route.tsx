@@ -1,7 +1,7 @@
 import { NextRequest, NextResponse } from "next/server";
-import Stripe from "stripe";
 import { stripeInstance } from "@/app/utils/stripeInstance";
 
+// endpoint for stripes customer creation, if exists return customers id, otherwise create customer 
 export async function POST(req: NextRequest) {
   try {
     const { email } = await req.json();
