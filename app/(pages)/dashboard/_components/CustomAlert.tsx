@@ -1,4 +1,4 @@
-import { Alert, AlertTitle, AlertColor, Typography } from "@mui/material";
+import { Alert, AlertColor, Typography } from "@mui/material";
 
 function CustomAlert({
   message,

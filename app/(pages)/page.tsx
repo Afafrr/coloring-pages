@@ -2,13 +2,13 @@ import { Container, Box, Typography } from "@mui/material";
 import Image from "next/image";
 import sunSvg from "@/public/Home/sunSvg.svg";
 import mountainSvg from "@/public/Home/mountainSvg.svg";
-import styles from "./styles/home.module.css";
+import styles from "../styles/home.module.css";
 import { Shadows_Into_Light_Two } from "next/font/google";
-import ShowcaseCard from "./_components/ShowcaseCard";
-import { showcaseCardsData } from "./assets/showcaseCardData";
-import Footer from "./_components/Footer";
-import BackgroundEffect from "./_components/BackgroundEffect";
-import EmailForm from "./_components/EmailForm";
+import ShowcaseCard from "../_components/ShowcaseCard";
+import { showcaseCardsData } from "../assets/showcaseCardData";
+import Footer from "../_components/Footer";
+import BackgroundEffect from "../_components/BackgroundEffect";
+import EmailForm from "../_components/EmailForm";
 
 const comic = Shadows_Into_Light_Two({
   subsets: ["latin"],
