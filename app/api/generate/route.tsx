@@ -21,9 +21,18 @@ export async function POST(req: NextRequest) {
   try {
     const { prompt, imagesNum } = await req.json();
     const cookieStore = await cookies();
+    const customerId = cookieStore.get("customerId")?.value as string;
+    if (!customerId)
+      return NextResponse.json(
+        {},
+        { status: 400, statusText: "Customer not found" }
+      );
     //if limit of images on client reached, return error
     if (imagesNum >= config.IMAGE_LIMIT)
-      return NextResponse.json({}, { status: 500, statusText: "Limit" });
+      return NextResponse.json(
+        {},
+        { status: 400, statusText: "Limit of images reached" }
+      );
     console.log(cookieStore.get("customerId")?.value);
 
     const reqPromptText: string =
@@ -58,7 +67,6 @@ export async function POST(req: NextRequest) {
     );
     //if blur applied correctly update customer's metadata with original url
     if (blurError) throw new Error(blurError.toString());
-    const customerId = cookieStore.get("customerId")?.value as string;
     await updateCustomersImages(customerId, output);
 
     const responseObj = {
