@@ -156,7 +156,7 @@ export default Checkout;
 
 function PriceComp() {
   const { images } = useContext(AppContext);
-  const price = priceCalc(images.length);
+  const { displayPrice } = priceCalc(images.length);
 
   const isBelowLimit = images.length < MIN_IMAGES_REQUIRED;
 
@@ -174,7 +174,7 @@ function PriceComp() {
         fontWeight={500}
         sx={{ display: { xs: "block", sm: "inline" } }}
       >
-        {isBelowLimit ? "" : price + " zł"}
+        {isBelowLimit ? "" : displayPrice + " zł"}
       </Typography>
     </>
   );

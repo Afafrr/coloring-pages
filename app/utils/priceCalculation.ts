@@ -9,5 +9,8 @@ export function priceCalc(itemsNum: number) {
   const discount = discounts[itemsNum] ?? 1;
 
   const outputPrice = basePrice * itemsNum * discount;
-  return outputPrice?.toFixed(2);
+  //fixed subcurrency factor for PLN = 100
+  const subcurrencyPrice = outputPrice * 100;
+  const displayPrice = outputPrice.toFixed(2);
+  return { displayPrice, subcurrencyPrice };
 }
