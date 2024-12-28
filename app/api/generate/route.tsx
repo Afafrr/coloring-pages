@@ -25,7 +25,7 @@ export async function POST(req: NextRequest) {
     if (!customerId)
       return NextResponse.json(
         {},
-        { status: 400, statusText: "Customer not found" }
+        { status: 400, statusText: "Brak klienta!" }
       );
     //if limit of images on client reached, return error
     if (imagesNum >= config.IMAGE_LIMIT)
