@@ -4,21 +4,19 @@ import {
   Box,
   TextField,
   Button,
-  Card,
-  Grid2,
   useMediaQuery,
   Typography,
 } from "@mui/material";
 import React, { useContext, useEffect, useState } from "react";
 import PopularBtns from "./PopularBtns";
 import { generateImage } from "@/app/actions/replicateActions";
-import CardImage from "./CardImage";
 import { AiResponse } from "@/types";
 import { useTheme } from "@mui/material/styles";
 import Modal from "./Modal";
 import LimitInfo from "./LimitInfo";
 import CustomAlert from "./CustomAlert";
 import { AppContext } from "@/app/_context/imagesContext";
+import ImagesContainer from "../../_components/ImagesContainer";
 
 export function FormInput({ limit }: { limit: number }) {
   const [input, setInput] = useState("");
@@ -133,30 +131,7 @@ export function FormInput({ limit }: { limit: number }) {
       <Typography variant="subtitle2" sx={{ mt: "10px" }}>
         Obrazy są przechowywane do 24h!
       </Typography>
-      <Card
-        suppressHydrationWarning
-        variant="outlined"
-        sx={{
-          minHeight: "400px",
-          mt: "10px",
-          padding: { xs: "8px", sm: "15px" },
-          backgroundColor: "#ffffff",
-        }}
-      >
-        <Grid2
-          container
-          columns={{ xs: 2, sm: 3, md: 4, lg: 5, xl: 7 }}
-          spacing={2}
-        >
-          {images.map((image) => (
-            <CardImage
-              key={image.id}
-              imageObj={image}
-              handleDelete={handleDeleteClick}
-            />
-          ))}
-        </Grid2>
-      </Card>
+      <ImagesContainer images={images} handleDeleteClick={handleDeleteClick} />
       <Modal
         showModal={showModal}
         handleClose={handleClose}
