@@ -33,7 +33,6 @@ export async function POST(req: NextRequest) {
         {},
         { status: 400, statusText: "Limit of images reached" }
       );
-    console.log(cookieStore.get("customerId")?.value);
 
     const reqPromptText: string =
       prompt || "popular random animated fairy tale character";
