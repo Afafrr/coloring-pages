@@ -6,18 +6,46 @@ import DeleteForeverIcon from "@mui/icons-material/DeleteForever";
 import ZoomInIcon from "@mui/icons-material/ZoomIn";
 import { Dispatch, SetStateAction, useState } from "react";
 
+//dashboard mode changes Cards buttons to zoom and delete
+//download has zoom and download buttons
+//null turns off buttons
+export type Variant = "dashboard" | "download" | "null";
+
 export default function CardImage({
   imageObj,
   handleDelete,
+  variant,
 }: {
   imageObj: ImageObj;
-  handleDelete: (id: string) => void;
+  handleDelete?: (id: string) => void;
+  variant: Variant;
 }) {
   const [zoom, setZoom] = useState(false);
   //increasing zIndex on zoom click
   const [zIndex, setZIndex] = useState(false);
   //state used to change zIndex after width transition ends
   const [transitionEnd, setTransitionEnd] = useState(false);
+  //based on Card 'mode' display different buttons
+  const Buttons = () => {
+    switch (variant) {
+      case "null":
+        return null;
+      case "dashboard":
+        return (
+          <>
+            <DeleteButton onClickAction={() => handleDelete?.(imageObj.id)} />
+            <ZoomButton zoomState={{ zoom, setZoom }} setZIndex={setZIndex} />
+          </>
+        );
+      case "download":
+        return (
+          <>
+            <ZoomButton zoomState={{ zoom, setZoom }} setZIndex={setZIndex} />
+            <DownloadButton onClickAction={() => handleDelete?.(imageObj.id)} />
+          </>
+        );
+    }
+  };
 
   return (
     <Grid2 size={1}>
@@ -47,12 +75,38 @@ export default function CardImage({
           transition: "width 0.3s, zoom 0.3s",
         }}
       >
-        <Overlay
-          imageObj={imageObj}
-          handleDelete={handleDelete}
-          zoomState={{ zoom, setZoom }}
-          setZIndex={setZIndex}
-        />
+        {/* Overlay after hovering over image */}
+        <Box
+          className="overlay"
+          sx={{
+            display: "none",
+            flexDirection: "column",
+            justifyContent: "space-between",
+            position: "relative",
+            width: "100%",
+            height: "100%",
+            p: "10px",
+            borderRadius: "5px",
+            backgroundColor: "rgba(0, 0, 0, 0.6)",
+            backdropFilter: "blur(2px)",
+            zIndex: 10,
+          }}
+        >
+          <Typography sx={{ color: "white", overflow: "hidden" }}>
+            {imageObj.inputText}
+          </Typography>
+          <Box
+            sx={{
+              display: "flex",
+              height: { xs: "50px", sm: "auto" },
+              justifyContent: "space-around",
+              gap: { xs: "10px", md: "5px" },
+            }}
+          >
+            <Buttons />
+          </Box>
+        </Box>
+        {/* End of overlay */}
         <Image
           priority
           fill
@@ -71,77 +125,71 @@ export default function CardImage({
   );
 }
 
-//Shows overlay on hover of an image
-function Overlay({
-  imageObj,
-  handleDelete,
+// Buttons Components
+function ZoomButton({
   zoomState,
   setZIndex,
 }: {
-  imageObj: ImageObj;
-  handleDelete: (id: string) => void;
   zoomState: { zoom: boolean; setZoom: Dispatch<SetStateAction<boolean>> };
   setZIndex: Dispatch<SetStateAction<boolean>>;
 }) {
-  const { palette } = useTheme();
   const { zoom, setZoom } = zoomState;
   return (
-    <Box
-      className="overlay"
-      sx={{
-        display: "none",
-        flexDirection: "column",
-        justifyContent: "space-between",
-        position: "relative",
-        width: "100%",
-        height: "100%",
-        p: "10px",
-        borderRadius: "5px",
-        backgroundColor: "rgba(0, 0, 0, 0.6)",
-        backdropFilter: "blur(2px)",
-        zIndex: 10,
-      }}
-    >
-      <Typography sx={{ color: "white", overflow: "hidden" }}>
-        {imageObj.inputText}
-      </Typography>
-      <Box
+    <Tooltip title="Powiększ">
+      <Button
+        variant="contained"
+        onClick={() => (setZoom(!zoom), setZIndex(true))}
         sx={{
-          display: "flex",
-          height: { xs: "50px", sm: "auto" },
-          justifyContent: "space-around",
-          gap: { xs: "10px", md: "5px" },
+          flex: 1,
+          minWidth: "5px",
+          color: "black",
+          backgroundColor: "#eeeeee",
         }}
       >
-        <Tooltip title="Usuń">
-          <Button
-            variant="contained"
-            onClick={() => handleDelete(imageObj.id)}
-            sx={{
-              flex: 1,
-              minWidth: "5px",
-              backgroundColor: palette.warning.main,
-              color: "#eeeeee",
-            }}
-          >
-            <DeleteForeverIcon />
-          </Button>
-        </Tooltip>
-        <Tooltip title="Powiększ">
-          <Button
-            variant="contained"
-            onClick={() => (setZoom(!zoom), setZIndex(true))}
-            sx={{
-              flex: 1,
-              minWidth: "5px",
-              color: "black",
-              backgroundColor: "#eeeeee",
-            }}
-          >
-            <ZoomInIcon />
-          </Button>
-        </Tooltip>
-      </Box>
-    </Box>
+        <ZoomInIcon />
+      </Button>
+    </Tooltip>
+  );
+}
+
+function DeleteButton({ onClickAction }: { onClickAction: () => void }) {
+  const { palette } = useTheme();
+
+  return (
+    <Tooltip title="Usuń">
+      <Button
+        variant="contained"
+        onClick={onClickAction}
+        sx={{
+          flex: 1,
+          minWidth: "5px",
+          backgroundColor: palette.warning.main,
+          color: "#eeeeee",
+        }}
+      >
+        <DeleteForeverIcon />
+      </Button>
+    </Tooltip>
+  );
+}
+
+function DownloadButton({ onClickAction }: { onClickAction: () => void }) {
+  const { palette } = useTheme();
+
+  return (
+    <Tooltip title="Usuń">
+      <Button
+        variant="contained"
+        onClick={onClickAction}
+        sx={{
+          flex: 1,
+          minWidth: "5px",
+          backgroundColor: palette.warning.main,
+          color: "#eeeeee",
+        }}
+      >
+        <DeleteForeverIcon />
+      </Button>
+    </Tooltip>
   );
 }

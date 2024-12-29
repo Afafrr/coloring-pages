@@ -131,7 +131,12 @@ export function FormInput({ limit }: { limit: number }) {
       <Typography variant="subtitle2" sx={{ mt: "10px" }}>
         Obrazy są przechowywane do 24h!
       </Typography>
-      <ImagesContainer images={images} handleDeleteClick={handleDeleteClick} />
+      <ImagesContainer
+        variant="dashboard"
+        images={images}
+        handleDeleteClick={handleDeleteClick}
+        columns={{ xs: 2, sm: 3, md: 4, lg: 5, xl: 7 }}
+      />
       <Modal
         showModal={showModal}
         handleClose={handleClose}
