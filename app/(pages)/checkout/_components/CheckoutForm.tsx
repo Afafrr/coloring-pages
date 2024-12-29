@@ -5,20 +5,28 @@ import {
   useStripe,
   useElements,
 } from "@stripe/react-stripe-js";
-import { Button, Input } from "@mui/material";
+import { Box, Button } from "@mui/material";
 import CustomAlert from "../../dashboard/_components/CustomAlert";
 import { useCookies } from "next-client-cookies";
 
-function CheckoutForm({ imagesNumber }: { imagesNumber: number }) {
+function CheckoutForm({
+  imagesNumber,
+  displayPrice,
+}: {
+  imagesNumber: number;
+  displayPrice: string;
+}) {
   const stripe = useStripe();
   const elements = useElements();
   const [message, setMessage] = useState("");
   const [isLoading, setIsLoading] = useState(false);
+  const [stripeReady, setStripeReady] = useState(false);
   const [clientSecret, setClientSecret] = useState<string>("");
   const cookies = useCookies();
   const userEmail = cookies.get("email") ?? "";
 
   useEffect(() => {
+    setStripeReady(false);
     fetch("/api/createPaymentIntent", {
       method: "POST",
       body: JSON.stringify({ imagesNumber }),
@@ -31,6 +39,7 @@ function CheckoutForm({ imagesNumber }: { imagesNumber: number }) {
   }, []);
 
   const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
+    setMessage("");
     e.preventDefault();
     if (!stripe || !elements) {
       // Stripe.js hasn't yet loaded.
@@ -40,7 +49,6 @@ function CheckoutForm({ imagesNumber }: { imagesNumber: number }) {
 
     const { error: submitError } = await elements.submit();
     if (submitError) {
-      setMessage(submitError.message || "Wystąpił nieznany błąd.");
       setIsLoading(false);
       return;
     }
@@ -56,19 +64,33 @@ function CheckoutForm({ imagesNumber }: { imagesNumber: number }) {
 
   return (
     <form id="payment-form" onSubmit={handleSubmit}>
-      {clientSecret && (
-        <PaymentElement
-          id="payment-element"
-          options={{ defaultValues: { billingDetails: { email: userEmail } } }}
-        />
-      )}
+      <Box sx={{ minHeight: "300px", mt: "10px" }}>
+        {clientSecret && (
+          <PaymentElement
+            onReady={() => setStripeReady(true)}
+            id="payment-element"
+            options={{
+              defaultValues: { billingDetails: { email: userEmail } },
+            }}
+          />
+        )}
+      </Box>
       <Button
         variant="contained"
         disabled={isLoading || !stripe || !elements}
         id="submit"
         type="submit"
+        sx={{
+          height: "44px",
+          width: "100%",
+          mt: "30px",
+          textTransform: "none",
+          fontWeight: 600,
+          opacity: `${stripeReady ? 1 : 0}`,
+          transition: "opacity 0.7s",
+        }}
       >
-        {isLoading ? "Loading..." : "Zapłać"}
+        {isLoading ? "Ładowanie..." : `Zapłać ${displayPrice} zł`}
       </Button>
       {message && <CustomAlert message={message} severity="error" />}
     </form>
