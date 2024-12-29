@@ -18,7 +18,7 @@ export default async function Page() {
         pr: { xs: "auto", md: "0px" },
       }}
     >
-      <Navbar />
+      <Navbar showEmail={true} />
       <Box
         sx={{
           flex: 1,

@@ -9,7 +9,7 @@ const comic = Shadows_Into_Light_Two({
   weight: ["400"],
 });
 
-function Navbar() {
+function Navbar({ showEmail }: { showEmail: boolean }) {
   const router = useRouter();
   const cookies = useCookies();
   const email = cookies.get("email") || "";
@@ -48,18 +48,20 @@ function Navbar() {
         >
           KOLOROWANKI.ART
         </Typography>
-        <Typography
-          sx={{
-            display: "flex",
-            flexWrap: "wrap",
-            overflow: "hidden",
-            position: "relative",
-            ml: "5px",
-            right: { xs: "0px", md: "250px", lg: "300px" },
-          }}
-        >
-          {email}
-        </Typography>
+        {showEmail && (
+          <Typography
+            sx={{
+              display: "flex",
+              flexWrap: "wrap",
+              overflow: "hidden",
+              position: "relative",
+              ml: "5px",
+              right: { xs: "0px", md: "250px", lg: "300px" },
+            }}
+          >
+            {email}
+          </Typography>
+        )}
       </Container>
     </Paper>
   );
