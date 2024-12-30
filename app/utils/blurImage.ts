@@ -23,8 +23,8 @@ export async function blurImage(
     const svg = getSVG(metadata);
     //apply a blur effect and text to a buffer
     const blurredBuffer = await sharp(imageBuffer)
-      .webp({ quality: 30 })
-      .blur(7)
+      .webp({ quality: 10 })
+      .blur(6)
       .composite([
         {
           input: Buffer.from(svg),
