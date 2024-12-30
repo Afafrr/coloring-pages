@@ -66,7 +66,7 @@ export async function POST(req: NextRequest) {
     );
     //if blur applied correctly update customer's metadata with original url
     if (blurError) throw new Error(blurError.toString());
-    await updateCustomersImages(customerId, output);
+    await updateCustomersImages(customerId, output, id);
 
     const responseObj = {
       id,
