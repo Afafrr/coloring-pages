@@ -18,7 +18,7 @@ function ImagesContainer({
   variant,
 }: {
   images: ImageObj[];
-  handleDeleteClick: (id: string) => void;
+  handleDeleteClick?: (id: string) => void;
   columns: Columns;
   variant: Variant;
 }) {
