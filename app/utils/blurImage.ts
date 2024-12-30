@@ -6,10 +6,12 @@ import { Metadata } from "sharp";
  * The blurred image is returned as a base64-encoded JPEG string.
  *
  * @param {string} imageUrl
- * @returns {Promise<{ base64Image?: string; error?: unknown }>} 
+ * @returns {Promise<{ base64Image?: string; error?: unknown }>}
  */
 
-export async function blurImage(imageUrl: string) {
+export async function blurImage(
+  imageUrl: string
+): Promise<{ base64Image?: string; error?: unknown }> {
   try {
     const response = await fetch(imageUrl);
     if (!response.ok)
@@ -21,6 +23,7 @@ export async function blurImage(imageUrl: string) {
     const svg = getSVG(metadata);
     //apply a blur effect and text to a buffer
     const blurredBuffer = await sharp(imageBuffer)
+      .webp({ quality: 30 })
       .blur(7)
       .composite([
         {
