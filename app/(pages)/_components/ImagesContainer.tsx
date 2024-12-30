@@ -28,7 +28,7 @@ function ImagesContainer({
       variant="outlined"
       sx={{
         position: "relative",
-        minHeight: "375px",
+        minHeight: { xs: "200px", md: "375px" },
         mt: "10px",
         padding: { xs: "8px", sm: "15px" },
         backgroundColor: "#ffffff",
