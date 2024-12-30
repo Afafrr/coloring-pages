@@ -52,7 +52,6 @@ function CheckoutForm({
       setIsLoading(false);
       return;
     }
-
     await stripe.confirmPayment({
       elements,
       clientSecret,
@@ -64,20 +63,23 @@ function CheckoutForm({
 
   return (
     <form id="payment-form" onSubmit={handleSubmit}>
-      <Box sx={{ minHeight: "300px", mt: "10px" }}>
-        {clientSecret && (
-          <PaymentElement
-            onReady={() => setStripeReady(true)}
-            id="payment-element"
-            options={{
-              defaultValues: { billingDetails: { email: userEmail } },
-            }}
-          />
-        )}
+      <Box
+        sx={{
+          minHeight: { xs: "310px", sm: "220px", md: "305px" },
+          mt: "15px",
+        }}
+      >
+        <PaymentElement
+          onReady={() => setStripeReady(true)}
+          id="payment-element"
+          options={{
+            defaultValues: { billingDetails: { email: userEmail } },
+          }}
+        />
       </Box>
       <Button
         variant="contained"
-        disabled={isLoading || !stripe || !elements}
+        disabled={Boolean(!clientSecret) || isLoading || !stripe || !elements}
         id="submit"
         type="submit"
         sx={{
