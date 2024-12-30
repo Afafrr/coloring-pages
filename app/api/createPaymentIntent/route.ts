@@ -12,19 +12,22 @@ export async function POST(req: NextRequest) {
     const customerId = cookieStore.get("customerId")?.value as string;
     if (!customerId)
       return NextResponse.json({ error: "Brak klienta!" }, { status: 400 });
+    const imagesIds: string[] = await req.json();
 
-    const { imagesNumber } = await req.json();
     if (
-      imagesNumber < config.MIN_IMAGES_REQUIRED ||
-      imagesNumber > config.IMAGE_LIMIT
+      imagesIds.length < config.MIN_IMAGES_REQUIRED ||
+      imagesIds.length > config.IMAGE_LIMIT
     )
       return NextResponse.json({ error: "LIMIT OBRAZOW" }, { status: 400 });
 
-    const { subcurrencyPrice } = priceCalc(imagesNumber);
+    const { subcurrencyPrice } = priceCalc(imagesIds.length);
     const paymentIntent = await stripeInstance.paymentIntents.create({
       amount: subcurrencyPrice,
       currency: "pln",
       customer: customerId,
+      metadata: {
+        imageIds: JSON.stringify(imagesIds),
+      },
     });
 
     return NextResponse.json({ clientSecret: paymentIntent.client_secret });

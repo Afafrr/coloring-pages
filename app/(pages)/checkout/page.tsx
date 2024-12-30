@@ -87,7 +87,7 @@ function CheckoutPage() {
               }}
             >
               <CheckoutForm
-                imagesNumber={images.length}
+                images={images}
                 displayPrice={displayPrice}
               />
             </Elements>

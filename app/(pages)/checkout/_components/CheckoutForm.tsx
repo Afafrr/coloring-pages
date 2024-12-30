@@ -8,12 +8,13 @@ import {
 import { Box, Button } from "@mui/material";
 import CustomAlert from "../../dashboard/_components/CustomAlert";
 import { useCookies } from "next-client-cookies";
+import { ImageObj } from "@/types";
 
 function CheckoutForm({
-  imagesNumber,
+  images,
   displayPrice,
 }: {
-  imagesNumber: number;
+  images: ImageObj[];
   displayPrice: string;
 }) {
   const stripe = useStripe();
@@ -24,12 +25,13 @@ function CheckoutForm({
   const [clientSecret, setClientSecret] = useState<string>("");
   const cookies = useCookies();
   const userEmail = cookies.get("email") ?? "";
+  const imagesIds = images.map((image) => image.id);
 
   useEffect(() => {
     setStripeReady(false);
     fetch("/api/createPaymentIntent", {
       method: "POST",
-      body: JSON.stringify({ imagesNumber }),
+      body: JSON.stringify(imagesIds),
     })
       .then((res) => res.json())
       .then((data) => {
