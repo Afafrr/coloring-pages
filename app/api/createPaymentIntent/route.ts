@@ -15,7 +15,7 @@ export async function POST(req: NextRequest) {
 
     const { imagesNumber } = await req.json();
     if (
-      imagesNumber <= config.MIN_IMAGES_REQUIRED ||
+      imagesNumber < config.MIN_IMAGES_REQUIRED ||
       imagesNumber > config.IMAGE_LIMIT
     )
       return NextResponse.json({ error: "LIMIT OBRAZOW" }, { status: 400 });

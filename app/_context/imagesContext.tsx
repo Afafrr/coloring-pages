@@ -1,5 +1,5 @@
 "use client";
-import { createContext, useState } from "react";
+import { createContext, useEffect, useState } from "react";
 import { ReactNode } from "react";
 import { ImageObj } from "@/types";
 //one context for whole app -> passing info about images from dashboard,
@@ -17,6 +17,10 @@ export const AppContext = createContext<Context>({
 
 export function AppContextProvider({ children }: { children: ReactNode }) {
   const [images, setImages] = useState<ImageObj[]>([]);
+  useEffect(() => {
+    setImages(JSON.parse(localStorage.getItem("images") || "[]"));
+  }, []);
+
   return (
     <AppContext.Provider value={{ images, setImages }}>
       {children}

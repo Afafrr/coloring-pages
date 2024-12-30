@@ -27,19 +27,11 @@ export function FormInput({ limit }: { limit: number }) {
   const theme = useTheme();
   const smallScreen = useMediaQuery(theme.breakpoints.down("md"));
   const { images, setImages } = useContext(AppContext);
-
-  //effects for managing localStorage
-  useEffect(() => {
-    setImages(JSON.parse(localStorage.getItem("images") || "[]"));
-  }, [setImages]);
-  useEffect(() => {
-    localStorage.setItem("images", JSON.stringify(images));
-  }, [images]);
-
+  //updating input up to 50 chars
   function handleOnChange(e: React.ChangeEvent<HTMLInputElement>) {
     if (e.target.value.length < 50) setInput(e.target.value);
   }
-
+  //generate click
   async function handleClick() {
     setIsLoading(true);
     setShowModal(false);
@@ -55,18 +47,21 @@ export function FormInput({ limit }: { limit: number }) {
     else {
       const { id, url, inputText } = data;
       const imageObj = { id, url, inputText };
-      setImages([...images, imageObj]);
+      const newImagesArr = [...images, imageObj];
+      localStorage.setItem("images", JSON.stringify(newImagesArr));
+      setImages(newImagesArr);
     }
     setIsLoading(false);
   }
-
   //if text length shorter than 3, then emptyInputHandler is fired
+  //modal is shown which ensures if you want to send such short input 
   function emptyInputHandler() {
     setShowModal(true);
   }
-
   function handleDeleteClick(id: string) {
-    setImages(images.filter((images) => images.id !== id));
+    const currentImages = images.filter((images) => images.id !== id);
+    setImages(currentImages);
+    localStorage.setItem("images", JSON.stringify(currentImages));
   }
 
   return (
