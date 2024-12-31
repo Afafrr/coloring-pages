@@ -11,7 +11,7 @@ export type AiResponse = {
 export type ImageObj = {
   id: string;
   url: string;
-  inputText: string;
+  inputText?: string;
 };
 
 /**

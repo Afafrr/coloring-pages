@@ -19,7 +19,7 @@ function Footer() {
     >
       <Divider sx={{ position: "absolute", top: "0px", width: "100%" }} />
       <Typography variant="subtitle2" sx={{ justifySelf: "center" }}>
-        Wszelkie prawa zastrzeżone © 2024
+        Wszelkie prawa zastrzeżone © 2025
       </Typography>
       <Typography
         variant="subtitle2"

@@ -1,3 +1,4 @@
+"use client";
 import { Box, Button, Tooltip, Typography, useTheme } from "@mui/material";
 import Image from "next/image";
 import { ImageObj } from "@/types";
@@ -5,6 +6,7 @@ import { Grid2 } from "@mui/material";
 import DeleteForeverIcon from "@mui/icons-material/DeleteForever";
 import ZoomInIcon from "@mui/icons-material/ZoomIn";
 import { Dispatch, SetStateAction, useState } from "react";
+import DownloadIcon from "@mui/icons-material/Download";
 
 //dashboard mode changes Cards buttons to zoom and delete
 //download has zoom and download buttons
@@ -41,7 +43,7 @@ export default function CardImage({
         return (
           <>
             <ZoomButton zoomState={{ zoom, setZoom }} setZIndex={setZIndex} />
-            <DownloadButton onClickAction={() => handleDelete?.(imageObj.id)} />
+            <DownloadButton onClickAction={() => downloadImage(imageObj.url)} />
           </>
         );
     }
@@ -173,23 +175,42 @@ function DeleteButton({ onClickAction }: { onClickAction: () => void }) {
   );
 }
 
-function DownloadButton({ onClickAction }: { onClickAction: () => void }) {
+function DownloadButton({ onClickAction }: { onClickAction: any }) {
   const { palette } = useTheme();
 
   return (
-    <Tooltip title="Usuń">
+    <Tooltip title="Pobierz">
       <Button
         variant="contained"
         onClick={onClickAction}
         sx={{
           flex: 1,
           minWidth: "5px",
-          backgroundColor: palette.warning.main,
+          backgroundColor: palette.primary.main,
           color: "#eeeeee",
         }}
       >
-        <DeleteForeverIcon />
+        <DownloadIcon />
       </Button>
     </Tooltip>
   );
+}
+
+async function downloadImage(url: string) {
+  try {
+    // Fetch the image as a Blob
+    const response = await fetch(url);
+    const blob = await response.blob();
+    // Create a download link
+    const link = document.createElement("a");
+    link.href = URL.createObjectURL(blob);
+    link.download = "kolorowanki.jpeg";
+    // Trigger a click event to start the download
+    link.click();
+
+    // Clean up the URL object
+    URL.revokeObjectURL(link.href);
+  } catch (error) {
+    console.error("Error downloading image:", error);
+  }
 }
