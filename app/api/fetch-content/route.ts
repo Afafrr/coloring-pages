@@ -21,7 +21,11 @@ export async function POST(req: NextRequest) {
     if (customer.deleted) throw new Error("Customer nie istnieje!");
     //get key value pairs
     const purchasedStatus = customer.metadata.purchased as CustomerMetaStatus;
-    if (purchasedStatus === "failed" || purchasedStatus === "false")
+    if (
+      purchasedStatus === "failed" ||
+      purchasedStatus === "false" ||
+      !purchasedStatus
+    )
       throw new Error("Nastąpił problem z transakcją. Spróbuj ponownie.");
 
     const paymentIds = JSON.parse(paymentIntent.metadata.imageIds) as string[];
@@ -31,6 +35,10 @@ export async function POST(req: NextRequest) {
       url: customer.metadata[id],
       inputText: "",
     }));
+    //clear customers metadata
+    await stripeInstance.customers.update(customerId, {
+      metadata: "",
+    });
 
     return NextResponse.json({ images: boughtImagesArr }, { status: 200 });
   } catch (error) {

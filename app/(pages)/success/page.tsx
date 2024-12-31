@@ -4,6 +4,7 @@ import Navbar from "../dashboard/_components/Navbar";
 import Footer from "@/app/_components/Footer";
 import CustomAlert from "../dashboard/_components/CustomAlert";
 import ReturnButton from "./_components/ReturnButton";
+import ClearLocalStorage from "./_components/ClearLocalStorage";
 
 async function Success({
   searchParams,
@@ -38,6 +39,7 @@ async function Success({
         height: "100vh",
       }}
     >
+      {!error && <ClearLocalStorage />}
       <Navbar showEmail={false} />
       <Box sx={{ pt: "60px" }}>
         {error ? (
