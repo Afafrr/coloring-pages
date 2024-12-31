@@ -1,7 +1,7 @@
 import { NextRequest, NextResponse } from "next/server";
 import { stripeInstance } from "@/app/utils/stripeInstance";
 
-// endpoint for stripes customer creation, if exists return customers id, otherwise create customer 
+// endpoint for stripes customer creation, if exists return customers id, otherwise create customer
 export async function POST(req: NextRequest) {
   try {
     const { email } = await req.json();
@@ -15,7 +15,11 @@ export async function POST(req: NextRequest) {
     }
     const name = email.split("@")[0];
     //create new customer
-    const newCustomer = await stripeInstance.customers.create({ name, email });
+    const newCustomer = await stripeInstance.customers.create({
+      name,
+      email,
+      metadata: { purchased: "false" },
+    });
 
     return NextResponse.json({ customer: newCustomer.id });
   } catch (error) {
