@@ -29,7 +29,7 @@ function CheckoutForm({
 
   useEffect(() => {
     setStripeReady(false);
-    fetch("/api/createPaymentIntent", {
+    fetch("/api/create-payment-intent", {
       method: "POST",
       body: JSON.stringify(imagesIds),
     })
