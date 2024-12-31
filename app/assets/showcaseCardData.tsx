@@ -1,5 +1,6 @@
 import elza from "@/public/Home/showcase/elza.jpg";
 import shrek from "@/public/Home/showcase/shrek.jpg";
+import spiderman from "@/public/Home/showcase/spiderman.jpg";
 import cars from "@/public/Home/showcase/cars.jpg";
 import harry from "@/public/Home/showcase/harry-potter (1).jpg";
 import scooby from "@/public/Home/showcase/scoobydoo.jpg";
@@ -37,7 +38,7 @@ export const showcaseCardsData: CardProps[] = [
     title: "Nie tylko bajki!",
     description: "Sky is the limit! Możesz pokolorować co tylko chcesz!",
     image1: harry,
-    image2: shrek,
+    image2: spiderman,
     alt1: "Książka o zwierzęciu",
     alt2: "Film o zwierzęciu",
   },
