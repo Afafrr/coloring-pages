@@ -1,5 +1,5 @@
 "use client";
-import { useState, useEffect, FormEvent } from "react";
+import { useState, useEffect, FormEvent, useMemo } from "react";
 import {
   PaymentElement,
   useStripe,
@@ -25,7 +25,7 @@ function CheckoutForm({
   const [clientSecret, setClientSecret] = useState<string>("");
   const cookies = useCookies();
   const userEmail = cookies.get("email") ?? "";
-  const imagesIds = images.map((image) => image.id);
+  const imagesIds = useMemo(() => images.map((image) => image.id), [images]);
 
   useEffect(() => {
     setStripeReady(false);
