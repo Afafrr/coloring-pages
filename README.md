@@ -1,27 +1,6 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
-
-## Getting Started
-
-First, run the development server:
-
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
-
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
-
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
-
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
 # Project Overview
-
-This project is a web application that integrates a variety of tools and libraries to provide a seamless user experience for generating, managing, and purchasing images. Below, you'll find details about dependencies, planned improvements, and the current workflow.
+The project is a coloring pages ai generator for kids.
+You have to provide the prompt, generate the image then you will be able to buy it
 
 ## Dependencies
 
@@ -29,8 +8,7 @@ The project utilizes the following dependencies:
 
 ### Core Dependencies
 - **Next.js** (`next`): ^15.0.3 - A React framework for server-side rendering and static website generation.
-- **React** (`react`): ^18.2.0 - A library for building user interfaces.
-- **ReactDOM** (`react-dom`): ^18.2.0 - Provides DOM-specific methods for React.
+- **Typescript** 
 
 ### UI and Styling
 - **Material UI** (`@mui/material`): ^6.1.7 - Components and tools for building React user interfaces.
@@ -56,6 +34,23 @@ The project utilizes the following dependencies:
 ### Miscellaneous
 - **Next Client Cookies** (`next-client-cookies`): ^2.0.0 - Utility for handling cookies in Next.js.
 
+## Workflow
+
+1. **Email Input**
+   - The user provides their email, which is used to create a Stripe customer.
+2. **Image Generation**
+   - Images are blurred on the server side, encoded in Base64, and sent to the client to be stored in `localStorage`.
+3. **Customer Metadata**
+   - The original image URL from Replicate is assigned to the customer metadata in the format `key=id : value=image_url` for future use.
+4. **Image Deletion**
+   - If a user deletes an image, the `localStorage` is updated accordingly.
+5. **Checkout Page**
+   - The checkout page displays blurred images that the user is purchasing.
+6. **Webhook Integration**
+   - After a successful payment, a webhook updates the customer's metadata with `purchased:true` to unlock the content on the success page.
+7. **Success Page**
+   - The success page sends a request to an endpoint to verify the purchase status and deliver the images to the user.
+
 ## Things to Improve
 
 1. **Internalization**
@@ -78,23 +73,6 @@ The project utilizes the following dependencies:
    - Provide English translations for all input fields.
 10. **Image Generation Loader**
     - Display a spinning loading circle on an image tile while generating the image.
-
-## Workflow
-
-1. **Email Input**
-   - The user provides their email, which is used to create a Stripe customer.
-2. **Image Generation**
-   - Images are blurred on the server side, encoded in Base64, and sent to the client to be stored in `localStorage`.
-3. **Customer Metadata**
-   - The original image URL from Replicate is assigned to the customer metadata in the format `key=id : value=image_url` for future use.
-4. **Image Deletion**
-   - If a user deletes an image, the `localStorage` is updated accordingly.
-5. **Checkout Page**
-   - The checkout page displays blurred images that the user is purchasing.
-6. **Webhook Integration**
-   - After a successful payment, a webhook updates the customer's metadata with `purchased:true` to unlock the content on the success page.
-7. **Success Page**
-   - The success page sends a request to an endpoint to verify the purchase status and deliver the images to the user.
 
 ---
 
