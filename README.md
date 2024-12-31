@@ -19,18 +19,83 @@ Open [http://localhost:3000](http://localhost:3000) with your browser to see the
 You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
 
 This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+# Project Overview
 
-## Learn More
+This project is a web application that integrates a variety of tools and libraries to provide a seamless user experience for generating, managing, and purchasing images. Below, you'll find details about dependencies, planned improvements, and the current workflow.
 
-To learn more about Next.js, take a look at the following resources:
+## Dependencies
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+The project utilizes the following dependencies:
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+### Core Dependencies
+- **Next.js** (`next`): ^15.0.3 - A React framework for server-side rendering and static website generation.
+- **React** (`react`): ^18.2.0 - A library for building user interfaces.
+- **ReactDOM** (`react-dom`): ^18.2.0 - Provides DOM-specific methods for React.
 
-## Deploy on Vercel
+### UI and Styling
+- **Material UI** (`@mui/material`): ^6.1.7 - Components and tools for building React user interfaces.
+- **Material Icons** (`@mui/icons-material`): ^6.1.7 - A library of Google Material Design icons for React.
+- **Emotion** (`@emotion/react`, `@emotion/styled`): ^11.13.x - CSS-in-JS library for styling components.
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+### Form Handling and Validation
+- **React Hook Form** (`react-hook-form`): ^7.54.1 - Lightweight form library for React.
+- **Yup** (`yup`): ^1.6.1 - Schema-based validation.
+- **@hookform/resolvers**: ^3.9.1 - Integration between Yup and React Hook Form.
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+### Payment Processing
+- **Stripe.js** (`@stripe/stripe-js`): ^5.4.0 - JavaScript library for Stripe integration.
+- **React Stripe.js** (`@stripe/react-stripe-js`): ^3.1.1 - React bindings for Stripe.js.
+- **Stripe** (`stripe`): ^17.4.0 - Node.js library for the Stripe API.
+
+### Image Processing
+- **Sharp** (`sharp`): ^0.33.5 - High-performance image processing library.
+
+### AI Integration
+- **Replicate** (`replicate`): ^1.0.1 - A library for interacting with the Replicate API.
+
+### Miscellaneous
+- **Next Client Cookies** (`next-client-cookies`): ^2.0.0 - Utility for handling cookies in Next.js.
+
+## Things to Improve
+
+1. **Internalization**
+   - Add multi-language support.
+2. **Cloudflare for Email Input**
+   - Integrate Cloudflare for improved security and validation of email input.
+3. **Feature: Connecting Dots to Create Image**
+   - Implement a feature that allows users to connect dots to generate an image.
+4. **LocalStorage Image Management**
+   - Ensure images are managed independently of the email and stored in `localStorage`.
+5. **Disable "Open Image in New Tab"**
+   - Prevent users from opening blurred images in a new tab.
+6. **Restrict Image Deletion**
+   - Set a maximum limit for deletions before requiring a purchase.
+7. **Modal Confirmation for Deletion**
+   - Add a modal confirmation when deleting a product.
+8. **Disable Image Opening in New Card**
+   - Restrict users from opening images in a new card.
+9. **Add English Translation to Input Fields**
+   - Provide English translations for all input fields.
+10. **Image Generation Loader**
+    - Display a spinning loading circle on an image tile while generating the image.
+
+## Workflow
+
+1. **Email Input**
+   - The user provides their email, which is used to create a Stripe customer.
+2. **Image Generation**
+   - Images are blurred on the server side, encoded in Base64, and sent to the client to be stored in `localStorage`.
+3. **Customer Metadata**
+   - The original image URL from Replicate is assigned to the customer metadata in the format `key=id : value=image_url` for future use.
+4. **Image Deletion**
+   - If a user deletes an image, the `localStorage` is updated accordingly.
+5. **Checkout Page**
+   - The checkout page displays blurred images that the user is purchasing.
+6. **Webhook Integration**
+   - After a successful payment, a webhook updates the customer's metadata with `purchased:true` to unlock the content on the success page.
+7. **Success Page**
+   - The success page sends a request to an endpoint to verify the purchase status and deliver the images to the user.
+
+---
+
+Feel free to modify and extend this README as the project evolves. If you encounter issues or have suggestions, please contribute or contact the maintainers.
