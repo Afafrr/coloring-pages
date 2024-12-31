@@ -54,13 +54,18 @@ function CheckoutForm({
       setIsLoading(false);
       return;
     }
-    await stripe.confirmPayment({
+    const { error: confirmError } = await stripe.confirmPayment({
       elements,
       clientSecret,
       confirmParams: {
         return_url: `${process.env.NEXT_PUBLIC_BASE_RUL}/success`,
       },
     });
+    if (confirmError) {
+      setIsLoading(false);
+      setMessage(confirmError.message!);
+      return;
+    }
   };
 
   return (
