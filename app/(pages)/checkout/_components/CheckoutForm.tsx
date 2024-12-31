@@ -38,7 +38,7 @@ function CheckoutForm({
         if (data.error) setMessage(data.error);
         setClientSecret(data.clientSecret);
       });
-  }, []);
+  }, [imagesIds]);
 
   const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
     setMessage("");

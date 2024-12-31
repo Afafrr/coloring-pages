@@ -175,7 +175,7 @@ function DeleteButton({ onClickAction }: { onClickAction: () => void }) {
   );
 }
 
-function DownloadButton({ onClickAction }: { onClickAction: any }) {
+function DownloadButton({ onClickAction }: { onClickAction: () => void }) {
   const { palette } = useTheme();
 
   return (

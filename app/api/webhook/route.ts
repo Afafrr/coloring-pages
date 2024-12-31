@@ -45,6 +45,13 @@ export async function POST(req: NextRequest) {
     }
     return NextResponse.json("Payment not succeeded", { status: 400 });
   } catch (error) {
-    return NextResponse.json("Invalid Signature", { status: 400 });
+    return NextResponse.json(
+      {
+        error: error instanceof Error ? error.message : "Invalid signature",
+      },
+      {
+        status: 400,
+      }
+    );
   }
 }
