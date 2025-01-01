@@ -2,6 +2,8 @@
 The project is a coloring pages ai generator for kids.
 You have to provide the prompt, generate the image then you will be able to buy it
 
+link to deplyed app: https://coloring-pages-plum.vercel.app/
+
 ## Dependencies
 
 The project utilizes the following dependencies:
