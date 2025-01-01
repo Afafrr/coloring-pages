@@ -49,12 +49,13 @@ export function FormInput({ limit }: { limit: number }) {
       const imageObj = { id, url, inputText };
       const newImagesArr = [...images, imageObj];
       localStorage.setItem("images", JSON.stringify(newImagesArr));
+      sessionStorage.setItem("images", "[]");
       setImages(newImagesArr);
     }
     setIsLoading(false);
   }
   //if text length shorter than 3, then emptyInputHandler is fired
-  //modal is shown which ensures if you want to send such short input 
+  //modal is shown which ensures if you want to send such short input
   function emptyInputHandler() {
     setShowModal(true);
   }

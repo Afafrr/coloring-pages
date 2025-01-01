@@ -3,7 +3,12 @@ import { ImageObj } from "@/types";
 import ImagesContainer from "../../_components/ImagesContainer";
 import { useEffect, useState } from "react";
 
-function ImagesContainerWithSessionStorage({ images: passedImages }: { images: ImageObj[] }) {
+function ImagesContainerWithSessionStorage({
+  images: passedImages,
+}: {
+  images: ImageObj[];
+}) {
+  if (!passedImages) return;
   const [images, setImages] = useState<ImageObj[]>(
     passedImages[0].url ? passedImages : []
   );
