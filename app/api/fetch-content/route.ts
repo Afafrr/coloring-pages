@@ -1,6 +1,6 @@
 import { NextRequest, NextResponse } from "next/server";
 import { stripeInstance } from "@/app/utils/stripeInstance";
-import { CustomerMetaStatus, ImageObj } from "@/types";
+import { ImageObj } from "@/types";
 
 // endpoint for stripes customer creation, if exists return customers id, otherwise create customer
 // metadata of paymentIntent should have imageIds which is array of image ids
@@ -11,22 +11,16 @@ export async function POST(req: NextRequest) {
     const paymentIntent = await stripeInstance.paymentIntents.retrieve(
       paymentIntentId
     );
-
+    //errors
     if (!paymentIntent)
       throw new Error("Nie istnieje PaymentIntent z takim ID!");
-    else if (!paymentIntent.customer) throw new Error("Nie ma takiego klienta");
+    if (paymentIntent.status !== "succeeded")
+      throw new Error(`Wystąpił problem z płatnością ${paymentIntent.status}`);
+    if (!paymentIntent.customer) throw new Error("Nie ma takiego klienta");
     //retrieve customers metadata
     const customerId = paymentIntent.customer as string;
     const customer = await stripeInstance.customers.retrieve(customerId);
-    if (customer.deleted) throw new Error("Customer nie istnieje!");
-    //get key value pairs
-    const purchasedStatus = customer.metadata.purchased as CustomerMetaStatus;
-    if (
-      purchasedStatus === "failed" ||
-      purchasedStatus === "false" ||
-      !purchasedStatus
-    )
-      throw new Error("Nastąpił problem z transakcją. Spróbuj ponownie.");
+    if (customer.deleted) throw new Error("Klient nie istnieje!");
 
     const paymentIds = JSON.parse(paymentIntent.metadata.imageIds) as string[];
     //get paymentIntent's urls from customers metadata

@@ -4,6 +4,8 @@ import Stripe from "stripe";
 import { stripeInstance } from "@/app/utils/stripeInstance";
 import { CustomerMetaStatus } from "@/types";
 
+
+//!!!!!!!NOT USED FOR NOW -> USED LATER FOR EMAIL NOTIFICATION!!!!!!!!!!!
 //stripe webhook checks if paymentIntent was successful, if so
 //metadata of customer gets updated with purchased: true
 export async function POST(req: NextRequest) {
@@ -15,6 +17,7 @@ export async function POST(req: NextRequest) {
     paymentIntent: Stripe.PaymentIntent,
     status: CustomerMetaStatus
   ) {
+    console.log([{ paymentIntent, status }]);
     await stripeInstance.customers.update(paymentIntent.customer as string, {
       metadata: {
         purchased: status,
