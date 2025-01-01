@@ -82,6 +82,8 @@ The project utilizes the following dependencies:
 ![image](https://github.com/user-attachments/assets/d2c760b2-549f-4cff-8a80-60ce046e8fb9)
 Failed payment case
 ![image](https://github.com/user-attachments/assets/5e2fd753-92d5-4819-847e-694c901ef443)
+Success payment case
+![image](https://github.com/user-attachments/assets/02931c4f-1c80-433d-98fe-8cfc44ba4051)
 
 
 
