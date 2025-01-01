@@ -8,14 +8,13 @@ function ImagesContainerWithSessionStorage({
 }: {
   images: ImageObj[];
 }) {
-  if (!passedImages) return;
-  const [images, setImages] = useState<ImageObj[]>(
-    passedImages[0].url ? passedImages : []
-  );
+  const [images, setImages] = useState<ImageObj[]>([]);
 
   useEffect(() => {
+    if (!passedImages) return;
     if (passedImages[0].url) {
       sessionStorage.setItem("images", JSON.stringify(passedImages));
+      setImages(passedImages);
     } else {
       const images = JSON.parse(sessionStorage.getItem("images") as string);
       setImages(images);
