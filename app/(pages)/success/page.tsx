@@ -1,10 +1,10 @@
 import { Box, Container, Typography } from "@mui/material";
-import ImagesContainer from "../_components/ImagesContainer";
 import Navbar from "../dashboard/_components/Navbar";
 import Footer from "@/app/_components/Footer";
 import CustomAlert from "../dashboard/_components/CustomAlert";
 import ReturnButton from "./_components/ReturnButton";
 import ClearLocalStorage from "./_components/ClearLocalStorage";
+import ImagesContainerWithSessionStorage from "./_components/ImagesContainerWithSessionStorage";
 
 async function Success({
   searchParams,
@@ -52,12 +52,7 @@ async function Success({
             Oto twoje zakupy!
           </Typography>
         )}
-
-        <ImagesContainer
-          images={images || []}
-          columns={{ xs: 2, sm: 3, md: 4, lg: 5 }}
-          variant="download"
-        />
+        <ImagesContainerWithSessionStorage images={images} />
         <Typography variant="body1" sx={{ mt: "30px" }}>
           Dziekujemy za korzystanie z serwisu
         </Typography>
