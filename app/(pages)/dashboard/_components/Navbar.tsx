@@ -46,7 +46,7 @@ function Navbar({ showEmail }: { showEmail: boolean }) {
           }}
           className={`${comic.className} `}
         >
-          KOLOROWANKI.ART
+          KOLORUJ.ART
         </Typography>
         {showEmail && (
           <Typography

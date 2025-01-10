@@ -23,8 +23,8 @@ export async function blurImage(
     const svg = getSVG(metadata);
     //apply a blur effect and text to a buffer
     const blurredBuffer = await sharp(imageBuffer)
-      .webp({ quality: 10 })
-      .blur(6)
+      .webp({ quality: 1 })
+      .blur(7)
       .composite([
         {
           input: Buffer.from(svg),
@@ -43,7 +43,7 @@ export async function blurImage(
 
 //creating watermark SVG
 function getSVG(metadata: Metadata): string {
-  const watermarkText = "kolorowanki.art";
+  const watermarkText = "koloruj.art";
   const svgWidth = metadata.width || 600;
   const svgHeight = metadata.height || 600;
 
@@ -52,7 +52,7 @@ function getSVG(metadata: Metadata): string {
           <style>
             .watermark {
               display:block;
-              font-size: 130px;
+              font-size: 150px;
               font-weight: bold;
               fill: rgba(0, 0, 0, 0.8);
               font-family: Arial, sans-serif;
@@ -60,7 +60,7 @@ function getSVG(metadata: Metadata): string {
               filter: drop-shadow(2px 2px 20px #fff);
             }
           </style>
-          <text x="60%" y="50%" class="watermark" transform="rotate(-45 ${
+          <text x="50%" y="50%" class="watermark" transform="rotate(-45 ${
             svgWidth / 2
           } ${svgHeight / 2})">
             ${watermarkText}
