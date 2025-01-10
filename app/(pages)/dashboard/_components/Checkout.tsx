@@ -167,7 +167,7 @@ function PriceComp() {
         fontWeight={500}
         sx={{ display: { xs: "block", sm: "inline" } }}
       >
-        {isBelowLimit ? "Niewystarczająca ilośc produktów" : "Cena produktów: "}
+        Cena produktów:{" "}
       </Typography>
       <Typography
         variant="body2"
@@ -180,8 +180,14 @@ function PriceComp() {
   );
 
   return (
-    <Box sx={{ mt: "15px" }}>{images.length ? <Price /> : <EmptyCart />}</Box>
+    <Box sx={{ mt: "15px" }}>
+      {isBelowLimit ? (
+        <Typography>
+          {images.length ? "Dodaj 1 produkt" : "Niewystarczająca ilość produktów"}
+        </Typography>
+      ) : (
+        <Price />
+      )}
+    </Box>
   );
 }
-
-const EmptyCart = () => <Typography>Dodaj produkt</Typography>;
