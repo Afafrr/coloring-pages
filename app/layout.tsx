@@ -1,8 +1,9 @@
 import type { Metadata } from "next";
 import "./styles/globals.css";
 export const metadata: Metadata = {
-  title: "Kolorowanki dla dzieci",
-  description: "Kolorowanki dla dzieci",
+  title: "Koloruj.art – Twórz Kolorowanki dla Dzieci z AI | Kreatywna Zabawa",
+  description:
+    "Odkryj Koloruj.art – platformę do tworzenia unikalnych kolorowanek dla dzieci dzięki sztucznej inteligencji! Personalizowane wzory, które rozwijają kreatywność i zapewniają wyjątkową zabawę.",
 };
 import { ThemeProvider } from "@mui/material";
 import { theme } from "@/theme";
