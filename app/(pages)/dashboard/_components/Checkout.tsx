@@ -98,14 +98,14 @@ function Checkout() {
                 sx={{ mt: "0px", lineHeight: "15px" }}
                 fontWeight={300}
               >
-                4 obrazy - 20% zniżki
+                4 obrazy - 15% zniżki
               </Typography>
               <Typography
                 fontSize="13px"
                 sx={{ mt: "0px", lineHeight: "15px" }}
                 fontWeight={300}
               >
-                5 obrazów - 30% zniżki
+                5 obrazów - 20% zniżki
               </Typography>
             </Box>
           </Box>

@@ -1,10 +1,10 @@
 export function priceCalc(itemsNum: number) {
-  const basePrice = 6;
+  const basePrice = 3.5;
   const discounts: { [key: string]: number } = {
     2: 1,
     3: 0.9,
-    4: 0.8,
-    5: 0.7,
+    4: 0.85,
+    5: 0.8,
   };
   const discount = discounts[itemsNum] ?? 1;
 
