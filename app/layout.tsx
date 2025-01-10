@@ -8,6 +8,7 @@ import { ThemeProvider } from "@mui/material";
 import { theme } from "@/theme";
 import { CookiesProvider } from "next-client-cookies/server";
 import { Inter } from "next/font/google";
+import { Analytics } from "@vercel/analytics/react";
 
 const inter = Inter({
   subsets: ["latin"],
@@ -25,6 +26,7 @@ export default function RootLayout({
         <CookiesProvider>
           <ThemeProvider theme={theme}>{children}</ThemeProvider>
         </CookiesProvider>
+        <Analytics />
       </body>
     </html>
   );
