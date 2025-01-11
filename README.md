@@ -67,15 +67,15 @@ The project utilizes the following dependencies:
 
 ---
 ## Screenshots
-###Home
+### Home
 ![image](https://github.com/user-attachments/assets/f3bfc0f6-ed76-4e8d-9394-d0188e86938e)
-###Dashboard
+### Dashboard
 ![image](https://github.com/user-attachments/assets/72814a06-cba4-49f2-841a-759d5b31bf00)
-###Generated Images
+### Generated Images
 ![image](https://github.com/user-attachments/assets/1f9e11aa-b0f4-4e70-88ef-45a63c635104)
-###Checkout Page
+### Checkout Page
 ![image](https://github.com/user-attachments/assets/d2c760b2-549f-4cff-8a80-60ce046e8fb9)
-###Failed payment case
+### Failed payment case
 ![image](https://github.com/user-attachments/assets/5e2fd753-92d5-4819-847e-694c901ef443)
-###Success payment case
+### Success payment case
 ![image](https://github.com/user-attachments/assets/02931c4f-1c80-433d-98fe-8cfc44ba4051)
