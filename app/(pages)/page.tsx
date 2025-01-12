@@ -60,18 +60,20 @@ export default function Home() {
               }}
             >
               Kolorowanki inspirowane twoją
+              <br />
+              <Typography
+                className={`${comic.className} ${styles.rainbowText}`}
+                style={{
+                  display: "inline-block",
+                  padding: "5px",
+                  textTransform: "uppercase",
+                }}
+                fontSize="inherit"
+              >
+                wyobraźnią
+              </Typography>
             </Typography>
-            <Typography
-              className={`${comic.className} ${styles.rainbowText}`}
-              variant="h1"
-              sx={{
-                display: "inline-block",
-                p: "5px",
-                textTransform: "uppercase",
-              }}
-            >
-              wyobraźnią
-            </Typography>
+
             <Typography
               variant="body2"
               sx={{ maxWidth: "600px", mt: "20px", fontWeight: "200" }}

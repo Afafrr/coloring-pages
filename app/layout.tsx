@@ -1,15 +1,21 @@
 import type { Metadata } from "next";
 import "./styles/globals.css";
-export const metadata: Metadata = {
-  title: "Koloruj.art – Twórz Kolorowanki dla Dzieci z AI | Kreatywna Zabawa",
-  description:
-    "Odkryj Koloruj.art – platformę do tworzenia unikalnych kolorowanek dla dzieci dzięki sztucznej inteligencji! Personalizowane wzory, które rozwijają kreatywność i zapewniają wyjątkową zabawę.",
-};
 import { ThemeProvider } from "@mui/material";
 import { theme } from "@/theme";
 import { CookiesProvider } from "next-client-cookies/server";
 import { Inter } from "next/font/google";
 import { Analytics } from "@vercel/analytics/react";
+
+export const metadata: Metadata = {
+  title: "Koloruj.art – Twórz Kolorowanki dla Dzieci z AI",
+  description:
+    "Odkryj Koloruj.art – platformę do tworzenia unikalnych kolorowanek dla dzieci dzięki sztucznej inteligencji! Personalizowane wzory, które rozwijają kreatywność i zapewniają wyjątkową zabawę.",
+  alternates: {
+    canonical: process.env.NEXT_PUBLIC_BASE_URL,
+  },
+  keywords:
+    "kolorowanki, kolorowanki dla dzieci, kolorowanki AI, aplikacja do kolorowania dla dzieci, drukowalne kolorowanki,",
+};
 
 const inter = Inter({
   subsets: ["latin"],
