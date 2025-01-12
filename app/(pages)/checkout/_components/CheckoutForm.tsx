@@ -58,7 +58,7 @@ function CheckoutForm({
       elements,
       clientSecret,
       confirmParams: {
-        return_url: `${process.env.NEXT_PUBLIC_BASE_RUL}/success`,
+        return_url: `${process.env.NEXT_PUBLIC_BASE_URL}/success`,
       },
     });
     if (confirmError) {

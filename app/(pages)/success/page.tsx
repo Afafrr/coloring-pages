@@ -14,7 +14,7 @@ async function Success({
   //get paymentIntent id from search params
   const params = await searchParams;
   const data = await fetch(
-    `${process.env.NEXT_PUBLIC_BASE_RUL}/api/fetch-content`,
+    `${process.env.NEXT_PUBLIC_BASE_URL}/api/fetch-content`,
     {
       method: "POST",
       body: JSON.stringify({
