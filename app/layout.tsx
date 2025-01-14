@@ -9,12 +9,12 @@ import { Analytics } from "@vercel/analytics/react";
 export const metadata: Metadata = {
   title: "Koloruj.art – Twórz Kolorowanki dla Dzieci z AI",
   description:
-    "Odkryj Koloruj.art – platformę do tworzenia unikalnych kolorowanek dla dzieci dzięki sztucznej inteligencji! Personalizowane wzory, które rozwijają kreatywność i zapewniają wyjątkową zabawę.",
+    "Odkryj Koloruj.art – platformę do tworzącą kolorowanki dla dzieci używając sztucznej inteligencji! Personalizowane wzory, które rozwijają kreatywność i zapewniają wyjątkową zabawę.",
   alternates: {
     canonical: process.env.NEXT_PUBLIC_BASE_URL,
   },
   keywords:
-    "kolorowanki, kolorowanki dla dzieci, kolorowanki AI, aplikacja do kolorowania dla dzieci, drukowalne kolorowanki,",
+    "kolorowanki, kolorowanki dla dzieci, kolorowanki AI, aplikacja do kolorowania dla dzieci, drukowalne kolorowanki, kolorowanki sztuczna inteligencja",
 };
 
 const inter = Inter({
